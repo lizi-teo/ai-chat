@@ -38,3 +38,14 @@ export const SingleWord: Story = {
   name: 'Single-word fallback',
   args: { fallback: 'Woolworths' },
 }
+
+export const Generating: Story = {
+  name: 'Generating (breathe loop)',
+  args: { isGenerating: true, fallback: 'AI Assistant' },
+}
+
+export const ReducedMotion: Story = {
+  name: 'Generating — reduced motion (static)',
+  parameters: { a11y: { config: { rules: [{ id: 'prefers-reduced-motion', enabled: true }] } } },
+  args: { isGenerating: true, fallback: 'AI Assistant' },
+}

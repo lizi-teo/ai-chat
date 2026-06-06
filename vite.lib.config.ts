@@ -28,7 +28,6 @@ export default defineConfig({
         'class-variance-authority',
         'clsx',
         'tailwind-merge',
-        /^@base-ui\/react/,
         /^@anthropic-ai/,
         /^next/,
       ],

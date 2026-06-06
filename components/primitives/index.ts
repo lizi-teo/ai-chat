@@ -24,3 +24,6 @@ export type { MorphingBlobProps } from './MorphingBlob/MorphingBlob'
 
 export { SkeletonBlock } from './SkeletonBlock/SkeletonBlock'
 export type { SkeletonBlockProps } from './SkeletonBlock/SkeletonBlock'
+
+export { QuantityStepper } from './QuantityStepper/QuantityStepper'
+export type { QuantityStepperProps } from './QuantityStepper/QuantityStepper'

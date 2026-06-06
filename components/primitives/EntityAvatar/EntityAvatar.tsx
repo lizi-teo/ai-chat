@@ -1,3 +1,6 @@
+'use client'
+
+import { motion, useReducedMotion } from 'framer-motion'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../../../lib/utils'
 
@@ -23,10 +26,13 @@ export interface EntityAvatarProps extends VariantProps<typeof avatarVariants> {
   fallback: string
   src?: string
   alt?: string
+  /** Pulse breathe loop while AI is composing — stops as soon as streaming begins */
+  isGenerating?: boolean
   className?: string
 }
 
-export function EntityAvatar({ fallback, src, alt, size, className }: EntityAvatarProps) {
+export function EntityAvatar({ fallback, src, alt, size, isGenerating = false, className }: EntityAvatarProps) {
+  const shouldReduce = useReducedMotion()
   const initials = fallback
     .split(' ')
     .slice(0, 2)
@@ -34,12 +40,20 @@ export function EntityAvatar({ fallback, src, alt, size, className }: EntityAvat
     .join('')
 
   return (
-    <div className={cn(avatarVariants({ size }), className)}>
+    <motion.div
+      className={cn(avatarVariants({ size }), className)}
+      animate={
+        !shouldReduce && isGenerating
+          ? { scale: [1, 1.025, 1] }
+          : { scale: 1 }
+      }
+      transition={{ duration: 2.4, repeat: isGenerating ? Infinity : 0, ease: 'easeInOut' }}
+    >
       {src ? (
         <img src={src} alt={alt ?? fallback} className="size-full object-cover" />
       ) : (
         <span aria-label={fallback}>{initials}</span>
       )}
-    </div>
+    </motion.div>
   )
 }

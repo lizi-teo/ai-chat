@@ -20,14 +20,15 @@ components/
   primitives/         # Tier 1 — zero-dep, token-styled atoms (StatusBadge, PriceDisplay, etc.)
   core/               # Tier 2 — compound components, documented as "Components" (MediaCard, DetailList, etc.)
   layouts/            # Tier 3 — structural skeletons with named slots (ListingLayout, ChatWindow, etc.)
-  ui/                 # shadcn primitives (Button only — do not add to this folder)
-  ThemeProvider.tsx   # Runtime theme injection
+  ui/                 # Button only — do not add to this folder (plain React button, no external deps)
+  ThemeProvider.tsx   # Runtime CSS variable injection
 playbook/             # Docs only — maps layouts to industry scenarios (no code)
 lib/
   tokens.css          # Token reference docs (comments only — consumers read this)
   theme-config.ts     # Design constants (ICON_STROKE_WIDTH)
 app/
-  globals.css         # CSS baseline + client theme classes
+  theme.css           # Design tokens only — :root, .dark, .theme-{client} overrides
+  globals.css         # Tailwind plumbing — imports theme.css, @theme inline mappings, @layer base
 .storybook/
   preview.tsx         # Storybook themes list — keep in sync with globals.css
 .docs/
@@ -44,11 +45,11 @@ app/
 
 | Layer | Location | Use for |
 |-------|----------|---------|
-| 1. Base | `globals.css :root` | Clean look defaults (cool off-white, 12px radius, soft shadows) — do not edit for client work |
-| 2. Theme class | `globals.css .theme-{client}` | Static brand overrides (primary, radius, etc.) |
+| 1. Base | `theme.css :root` | Clean look defaults (cool off-white, 12px radius, soft shadows) — do not edit for client work |
+| 2. Theme class | `theme.css .theme-{client}` | Static brand overrides (primary, radius, etc.) |
 | 3. Runtime | `<ThemeProvider tokens={…}>` | Dynamic JS-driven overrides |
 
-**Adding a new client theme**: edit `globals.css` (add `.theme-x`) AND `.storybook/preview.tsx` (add to themes object). Both must stay in sync.
+**Adding a new client theme**: edit `theme.css` (add `.theme-x`) AND `.storybook/preview.tsx` (add to themes object). Both must stay in sync.
 
 ## Non-negotiable rules
 

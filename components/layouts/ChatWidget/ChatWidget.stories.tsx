@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { ChatWidget } from './ChatWidget'
+import { THREAD_REF_MOCK } from './mockData'
 
 const meta = {
   title: 'Layouts/ChatWidget',
@@ -25,6 +26,11 @@ export const Grocery: Story = {
 export const Pharmacy: Story = {
   name: 'Pharmacy (Chemist)',
   args: { vertical: 'pharmacy' },
+}
+
+export const ThreadReferenceGlow: Story = {
+  name: 'Thread reference glow (ambient)',
+  args: { mockData: THREAD_REF_MOCK },
 }
 
 export const CustomMockData: Story = {

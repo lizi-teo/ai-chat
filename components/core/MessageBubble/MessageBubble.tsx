@@ -1,8 +1,10 @@
 'use client'
 
-import { createContext, useContext } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { createContext, useContext, useState } from 'react'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { ThumbsUp, ThumbsDown } from 'lucide-react'
 import { cn } from '../../../lib/utils'
+import { Button } from '../../ui/button'
 import { EntityAvatar, type EntityAvatarProps, TimestampLabel } from '../../primitives'
 
 type Role = 'user' | 'assistant'
@@ -19,6 +21,8 @@ export interface MessageBubbleProps {
   grouped?: boolean
   /** True while the AI is actively generating — triggers avatar breathe and stops on first token */
   isGenerating?: boolean
+  /** Briefly flashes a glow overlay when the AI references this message */
+  isReferenced?: boolean
   className?: string
   children?: React.ReactNode
 }
@@ -39,6 +43,12 @@ interface TimestampSubProps {
   className?: string
 }
 
+interface FeedbackRowProps {
+  onThumbsUp?: () => void
+  onThumbsDown?: () => void
+  className?: string
+}
+
 const EASE_OUT = [0, 0, 0.2, 1] as const
 
 // Container drives the stagger; individual words inherit via variants
@@ -51,6 +61,17 @@ const wordVariants = {
   hidden: { opacity: 0, y: 4 },
   show: { opacity: 1, y: 0, transition: { duration: 0.18, ease: EASE_OUT } },
 }
+
+// Fixed particle angles for thumbs-up burst (no Math.random — deterministic)
+const BURST_PARTICLES = [
+  { angle: -90, distance: 38 },
+  { angle: -45, distance: 35 },
+  { angle: 0,   distance: 42 },
+  { angle: 45,  distance: 36 },
+  { angle: 135, distance: 40 },
+  { angle: 200, distance: 37 },
+  { angle: 260, distance: 35 },
+]
 
 function Content({ children, words, className }: ContentProps) {
   const { role } = useContext(BubbleContext)
@@ -70,7 +91,6 @@ function Content({ children, words, className }: ContentProps) {
     >
       {useWordReveal ? (
         shouldReduce ? (
-          // Reduced motion: render words instantly, no movement or stagger
           <span>{words!.map((w, i) => <span key={i} className="inline-block mr-[0.25em]">{w}</span>)}</span>
         ) : (
           <motion.span
@@ -97,26 +117,11 @@ function Content({ children, words, className }: ContentProps) {
 
 function Avatar({ size = 'sm', ...props }: EntityAvatarProps) {
   const { role, grouped, isGenerating } = useContext(BubbleContext)
-  const shouldReduce = useReducedMotion()
 
-  // User position already signals sender — no avatar needed
   if (role === 'user') return null
-
-  // Grouped: no avatar — col layout needs neither
   if (grouped) return null
 
-  return (
-    <motion.div
-      animate={
-        !shouldReduce && isGenerating
-          ? { scale: [1, 1.025, 1] }
-          : { scale: 1 }
-      }
-      transition={{ duration: 2.4, repeat: isGenerating ? Infinity : 0, ease: 'easeInOut' }}
-    >
-      <EntityAvatar size={size} {...props} />
-    </motion.div>
-  )
+  return <EntityAvatar size={size} isGenerating={isGenerating} {...props} />
 }
 
 function Timestamp({ datetime, className }: TimestampSubProps) {
@@ -128,10 +133,78 @@ function Timestamp({ datetime, className }: TimestampSubProps) {
   )
 }
 
+function FeedbackRow({ onThumbsUp, onThumbsDown, className }: FeedbackRowProps) {
+  const [burst, setBurst] = useState(false)
+  const [shaking, setShaking] = useState(false)
+  const shouldReduce = useReducedMotion()
+
+  function handleThumbsUp() {
+    setBurst(true)
+    onThumbsUp?.()
+    setTimeout(() => setBurst(false), 700)
+  }
+
+  function handleThumbsDown() {
+    setShaking(true)
+    onThumbsDown?.()
+    setTimeout(() => setShaking(false), 400)
+  }
+
+  return (
+    <div className={cn('flex gap-0.5 mt-0.5', className)} role="group" aria-label="Message feedback">
+      <div className="relative inline-flex">
+        <AnimatePresence>
+          {burst && !shouldReduce && BURST_PARTICLES.map((p, i) => {
+            const rad = (p.angle * Math.PI) / 180
+            return (
+              <motion.span
+                key={i}
+                aria-hidden="true"
+                className="absolute inset-0 m-auto pointer-events-none flex items-center justify-center text-xs leading-none"
+                style={{ width: 0, height: 0 }}
+                initial={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+                animate={{ opacity: 0, x: Math.cos(rad) * p.distance, y: Math.sin(rad) * p.distance, scale: 0.6 }}
+                exit={{}}
+                transition={{ duration: 0.6, type: 'spring', stiffness: 200, damping: 20 }}
+              >
+                ✨
+              </motion.span>
+            )
+          })}
+        </AnimatePresence>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="size-7 text-muted-foreground hover:text-foreground"
+          onClick={handleThumbsUp}
+          aria-label="Helpful"
+        >
+          <ThumbsUp size={13} />
+        </Button>
+      </div>
+      <motion.div
+        animate={!shouldReduce && shaking ? { x: [0, -4, 4, -3, 3, 0] } : {}}
+        transition={{ duration: 0.35, ease: 'easeInOut' }}
+      >
+        <Button
+          variant="ghost"
+          size="icon"
+          className="size-7 text-muted-foreground hover:text-foreground"
+          onClick={handleThumbsDown}
+          aria-label="Not helpful"
+        >
+          <ThumbsDown size={13} />
+        </Button>
+      </motion.div>
+    </div>
+  )
+}
+
 export function MessageBubble({
   role,
   grouped = false,
   isGenerating = false,
+  isReferenced = false,
   className,
   children,
 }: MessageBubbleProps) {
@@ -161,11 +234,23 @@ export function MessageBubble({
             : { duration: 0.2, ease: EASE_OUT }
         }
         className={cn(
-          'flex w-full gap-2 md:gap-3',
+          'relative flex w-full gap-2 md:gap-3',
           isUser ? 'flex-row-reverse items-end' : 'flex-col items-start',
           className
         )}
       >
+        <AnimatePresence>
+          {isReferenced && (
+            <motion.div
+              key="glow"
+              aria-hidden="true"
+              className="absolute inset-0 rounded-2xl bg-primary/10 pointer-events-none"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 1.2, ease: 'easeOut' } }}
+            />
+          )}
+        </AnimatePresence>
         {children}
       </motion.div>
     </BubbleContext.Provider>
@@ -175,3 +260,4 @@ export function MessageBubble({
 MessageBubble.Content = Content
 MessageBubble.Avatar = Avatar
 MessageBubble.Timestamp = Timestamp
+MessageBubble.FeedbackRow = FeedbackRow

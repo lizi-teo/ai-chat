@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { MessageBubble } from './MessageBubble'
+import { useErrorShake } from '../../../lib/motion'
 
 const meta = {
   title: 'Components/MessageBubble',
@@ -198,4 +199,92 @@ export const Conversation: Story = {
       </div>
     </AnimatePresence>
   ),
+}
+
+export const FeedbackRowDefault: Story = {
+  name: 'Feedback row — thumbs up burst',
+  render: () => (
+    <div className="flex flex-col gap-3 p-4 max-w-lg">
+      <MessageBubble role="assistant">
+        <MessageBubble.Avatar fallback="AI" />
+        <div className="flex flex-col gap-1">
+          <MessageBubble.Content>
+            The cheapest is ANA at $899 return. Want me to hold that fare?
+          </MessageBubble.Content>
+          <MessageBubble.FeedbackRow
+            onThumbsUp={() => console.log('helpful')}
+            onThumbsDown={() => console.log('not helpful')}
+          />
+        </div>
+      </MessageBubble>
+      <p className="text-xs text-muted-foreground">Click 👍 for particle burst · Click 👎 for shake</p>
+    </div>
+  ),
+}
+
+export const ErrorShakeDemo: Story = {
+  name: 'Error shake (useErrorShake hook)',
+  render: () => {
+    const [hasError, setHasError] = useState(false)
+    const shakeProps = useErrorShake(hasError)
+
+    function trigger() {
+      setHasError(true)
+      setTimeout(() => setHasError(false), 400)
+    }
+
+    return (
+      <div className="flex flex-col gap-4 p-4 max-w-lg">
+        <motion.div {...shakeProps}>
+          <MessageBubble role="user">
+            <div className="flex flex-col gap-1 items-end">
+              <MessageBubble.Content>Message failed to send</MessageBubble.Content>
+            </div>
+          </MessageBubble>
+        </motion.div>
+        <Button variant="destructive" size="sm" className="self-start" onClick={trigger}>
+          Trigger error shake
+        </Button>
+      </div>
+    )
+  },
+}
+
+export const ReferencedGlow: Story = {
+  name: 'Thread reference glow',
+  render: () => {
+    const [isReferenced, setIsReferenced] = useState(false)
+
+    function trigger() {
+      setIsReferenced(true)
+      setTimeout(() => setIsReferenced(false), 1400)
+    }
+
+    return (
+      <div className="flex flex-col gap-4 p-4 max-w-lg">
+        <MessageBubble role="assistant" isReferenced={isReferenced}>
+          <MessageBubble.Avatar fallback="AI" />
+          <div className="flex flex-col gap-1">
+            <MessageBubble.Content>
+              Here's what I'd add to your cart for pasta carbonara.
+            </MessageBubble.Content>
+            <MessageBubble.Timestamp datetime={new Date(Date.now() - 120000).toISOString()} />
+          </div>
+        </MessageBubble>
+
+        <MessageBubble role="assistant">
+          <MessageBubble.Avatar fallback="AI" />
+          <div className="flex flex-col gap-1">
+            <MessageBubble.Content>
+              As I mentioned above with the pasta ingredients — all three are in stock today.
+            </MessageBubble.Content>
+          </div>
+        </MessageBubble>
+
+        <Button variant="outline" size="sm" className="self-start" onClick={trigger}>
+          Trigger reference glow
+        </Button>
+      </div>
+    )
+  },
 }

@@ -65,7 +65,7 @@ function Field({ placeholder = 'Type a message…', className }: FieldProps) {
       className={cn(
         'flex-1 resize-none bg-transparent text-sm md:text-base text-foreground',
         'placeholder:text-muted-foreground leading-relaxed',
-        'focus:outline-none focus:ring-0',
+        'outline-none border-0 ring-0 shadow-none',
         'max-h-32 md:max-h-40 overflow-y-auto',
         'py-1.5',
         className

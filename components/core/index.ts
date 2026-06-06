@@ -33,3 +33,9 @@ export type { CardStackProps } from './CardStack/CardStack'
 
 export { ChipToCard } from './ChipToCard/ChipToCard'
 export type { ChipToCardProps } from './ChipToCard/ChipToCard'
+
+export { CartItem } from './CartItem/CartItem'
+export type { CartItemProps } from './CartItem/CartItem'
+
+export { CartSummary } from './CartSummary/CartSummary'
+export type { CartSummaryProps } from './CartSummary/CartSummary'

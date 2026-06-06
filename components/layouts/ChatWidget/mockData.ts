@@ -10,10 +10,13 @@ export interface MockProduct {
 }
 
 export interface MockMessage {
+  id?: string
   role: 'user' | 'bot'
   text?: string
   products?: MockProduct[]
   quickReplies?: string[]
+  /** When set, this bot message references the earlier message with this id (triggers glow + SVG line) */
+  referencedId?: string
 }
 
 export interface MockData {
@@ -26,12 +29,14 @@ const GROCERY_MOCK: MockData = {
   botName: 'Coles Assistant',
   messages: [
     {
+      id: 'msg-1',
       role: 'bot',
       text: 'Hi! What can I help you find today?',
       quickReplies: ['Recipe ideas', 'Reorder last shop', 'Find specials'],
     },
-    { role: 'user', text: 'Ingredients for pasta carbonara for 4' },
+    { id: 'msg-2', role: 'user', text: 'Ingredients for pasta carbonara for 4' },
     {
+      id: 'msg-3',
       role: 'bot',
       text: "Here's what I'd add to your cart:",
       products: [
@@ -74,12 +79,14 @@ const PHARMACY_MOCK: MockData = {
   botName: 'Chemist Assistant',
   messages: [
     {
+      id: 'msg-1',
       role: 'bot',
       text: 'Hi! How can I help you today?',
       quickReplies: ['Find medication', 'Upload eScript', 'Check interactions'],
     },
-    { role: 'user', text: "Why can't I add Sudafed to my cart?" },
+    { id: 'msg-2', role: 'user', text: "Why can't I add Sudafed to my cart?" },
     {
+      id: 'msg-3',
       role: 'bot',
       text: 'Pseudoephedrine products are Schedule 3 in Australia — they require in-store pharmacist approval and cannot be purchased online. Here\'s an alternative I can add for you:',
       products: [
@@ -96,9 +103,28 @@ const PHARMACY_MOCK: MockData = {
       ],
     },
     {
+      id: 'msg-4',
       role: 'bot',
       text: 'Need more help with this?',
       quickReplies: ['Chat with pharmacist', 'Find in-store', 'Upload script'],
+    },
+  ],
+}
+
+export const THREAD_REF_MOCK: MockData = {
+  botName: 'AI Assistant',
+  messages: [
+    {
+      id: 'msg-1',
+      role: 'bot',
+      text: 'Pseudoephedrine (Sudafed) is Schedule 3 — it can only be dispensed with pharmacist supervision in-store.',
+    },
+    { id: 'msg-2', role: 'user', text: 'Can I get something similar online?' },
+    {
+      id: 'msg-3',
+      role: 'bot',
+      text: 'Yes — as I mentioned earlier about the Schedule 3 restriction, products without pseudoephedrine are fully available online. Here are some options.',
+      referencedId: 'msg-1',
     },
   ],
 }

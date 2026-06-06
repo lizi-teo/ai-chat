@@ -41,41 +41,18 @@ export function ChipToCard({
 
   return (
     <LayoutGroup id={rootId}>
-      <div className={cn(className)}>
-        <div className="flex flex-wrap gap-2">
-          <AnimatePresence initial={false}>
-            {!activeId &&
-              chips.map((chip) => (
-                <motion.div
-                  key={chip.id}
-                  layoutId={`${rootId}-${chip.id}`}
-                  exit={{
-                    opacity: 0,
-                    scale: shouldReduce ? 1 : 0.9,
-                    transition: { duration: 0.15, ease: [0.4, 0, 1, 1] },
-                  }}
-                  className="shrink-0"
-                  whileTap={shouldReduce ? undefined : { scale: 0.97 }}
-                >
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="rounded-full"
-                    onClick={() => select(chip.id)}
-                  >
-                    {chip.label}
-                  </Button>
-                </motion.div>
-              ))}
-          </AnimatePresence>
-        </div>
-
-        <AnimatePresence initial={false}>
-          {activeId && selectedChip && (
+      {/*
+        Chips and card occupy the SAME DOM position so there is no vertical
+        offset (mt-3) that could shift the card's FLIP target while chips exit.
+      */}
+      <div className={cn('relative', className)}>
+        <AnimatePresence mode="popLayout" initial={false}>
+          {activeId && selectedChip ? (
+            // Card — morphs in from the selected chip via layoutId FLIP
             <motion.div
               key={activeId}
               layoutId={`${rootId}-${activeId}`}
-              className="mt-3 rounded-xl border border-border bg-card overflow-hidden shadow-[var(--shadow-card)]"
+              className="rounded-xl border border-border bg-card overflow-hidden shadow-[var(--shadow-card)]"
               initial={{ opacity: shouldReduce ? 1 : 0 }}
               animate={{ opacity: 1 }}
               exit={{
@@ -96,6 +73,32 @@ export function ChipToCard({
                   ← Back to options
                 </Button>
               </div>
+            </motion.div>
+          ) : (
+            // Chip list — exits as a unit; individual chip layoutIds are
+            // recorded before exit so the FLIP still fires for the selected chip
+            <motion.div
+              key="chip-list"
+              className="flex flex-wrap gap-2"
+              exit={{ opacity: 0, transition: { duration: 0.1 } }}
+            >
+              {chips.map((chip) => (
+                <motion.div
+                  key={chip.id}
+                  layoutId={`${rootId}-${chip.id}`}
+                  className="shrink-0"
+                  whileTap={shouldReduce ? undefined : { scale: 0.97 }}
+                >
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full"
+                    onClick={() => select(chip.id)}
+                  >
+                    {chip.label}
+                  </Button>
+                </motion.div>
+              ))}
             </motion.div>
           )}
         </AnimatePresence>

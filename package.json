@@ -14,11 +14,13 @@
       "import": "./dist/primitives.js",
       "types": "./dist/components/primitives/index.d.ts"
     },
-    "./styles": "./app/globals.css"
+    "./styles": "./app/globals.css",
+    "./theme": "./app/theme.css"
   },
   "files": [
     "dist",
-    "app/globals.css"
+    "app/globals.css",
+    "app/theme.css"
   ],
   "repository": {
     "type": "git",
@@ -36,7 +38,6 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.101.0",
-    "@base-ui/react": "^1.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.40.0",
