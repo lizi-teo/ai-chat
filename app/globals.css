@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ── Baseline: warm neutral (Airbnb/Qantas-inspired) ─────────────── */
+/* Override with a .theme-{client} class or ThemeProvider tokens.     */
+
+:root {
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+
+  /* Warm off-white — slightly warmer than pure white, more premium */
+  --background: oklch(0.98 0.004 85);
+  /* Deep charcoal — warmer than pure black, easier on the eye */
+  --foreground: oklch(0.16 0.008 250);
+
+  /* Pure white cards lift off the warm background */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0.008 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0.008 250);
+
+  /* Deep navy — trustworthy default, replace with any brand colour */
+  --primary: oklch(0.27 0.09 243);
+  --primary-foreground: oklch(0.98 0 0);
+
+  /* Warm light grey for secondary actions */
+  --secondary: oklch(0.96 0.003 85);
+  --secondary-foreground: oklch(0.16 0.008 250);
+
+  /* Muted — assistant bubbles, placeholders, disabled */
+  --muted: oklch(0.95 0.004 85);
+  --muted-foreground: oklch(0.48 0.012 250);
+
+  /* Hover/focus surface */
+  --accent: oklch(0.96 0.003 85);
+  --accent-foreground: oklch(0.16 0.008 250);
+
+  /* Errors, warnings, delete actions */
+  --destructive: oklch(0.577 0.245 27.325);
+
+  /* Warm grey borders — Airbnb-like warmth */
+  --border: oklch(0.88 0.006 85);
+  --input: oklch(0.88 0.006 85);
+  /* Blue focus ring — accessible, distinct from brand primary */
+  --ring: oklch(0.45 0.12 243);
+
+  /* Charts */
+  --chart-1: oklch(0.55 0.14 243);
+  --chart-2: oklch(0.62 0.12 180);
+  --chart-3: oklch(0.58 0.14 140);
+  --chart-4: oklch(0.68 0.14 60);
+  --chart-5: oklch(0.62 0.16 25);
+
+  /* Semantic status colors — used by StatusBadge and other state indicators */
+  --success: oklch(0.50 0.15 150);
+  --success-foreground: oklch(0.98 0 0);
+  --warning: oklch(0.72 0.16 75);
+  --warning-foreground: oklch(0.16 0.008 250);
+
+  /* Base radius — 8px clean modern, all variants derive from this */
+  --radius: 0.5rem;
+
+  --sidebar: oklch(0.97 0.004 85);
+  --sidebar-foreground: oklch(0.16 0.008 250);
+  --sidebar-primary: oklch(0.27 0.09 243);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.94 0.005 85);
+  --sidebar-accent-foreground: oklch(0.16 0.008 250);
+  --sidebar-border: oklch(0.88 0.006 85);
+  --sidebar-ring: oklch(0.45 0.12 243);
+}
+
+.dark {
+  --background: oklch(0.14 0.008 250);
+  --foreground: oklch(0.97 0.003 85);
+  --card: oklch(0.18 0.009 250);
+  --card-foreground: oklch(0.97 0.003 85);
+  --popover: oklch(0.18 0.009 250);
+  --popover-foreground: oklch(0.97 0.003 85);
+  --primary: oklch(0.72 0.10 243);
+  --primary-foreground: oklch(0.14 0.008 250);
+  --secondary: oklch(0.24 0.010 250);
+  --secondary-foreground: oklch(0.97 0.003 85);
+  --muted: oklch(0.24 0.010 250);
+  --muted-foreground: oklch(0.62 0.015 250);
+  --accent: oklch(0.24 0.010 250);
+  --accent-foreground: oklch(0.97 0.003 85);
+  --destructive: oklch(0.704 0.191 22.216);
+  --success: oklch(0.63 0.15 150);
+  --success-foreground: oklch(0.14 0.008 250);
+  --warning: oklch(0.80 0.16 75);
+  --warning-foreground: oklch(0.14 0.008 250);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.62 0.10 243);
+  --chart-1: oklch(0.62 0.14 243);
+  --chart-2: oklch(0.68 0.12 180);
+  --chart-3: oklch(0.62 0.14 140);
+  --chart-4: oklch(0.70 0.14 60);
+  --chart-5: oklch(0.65 0.16 25);
+  --sidebar: oklch(0.18 0.009 250);
+  --sidebar-foreground: oklch(0.97 0.003 85);
+  --sidebar-primary: oklch(0.72 0.10 243);
+  --sidebar-primary-foreground: oklch(0.14 0.008 250);
+  --sidebar-accent: oklch(0.24 0.010 250);
+  --sidebar-accent-foreground: oklch(0.97 0.003 85);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.62 0.10 243);
+}
+
+/* ── Client theme overrides ──────────────────────────────────────── */
+/* Layer 2: static per-client classes. See .docs/ui-guidelines for   */
+/* layer 3 (runtime ThemeProvider tokens).                           */
+
+/* Travel / Airlines — sky blue */
+.theme-travel {
+  --primary: oklch(0.42 0.16 245);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.55 0.16 245);
+  --radius: 0.5rem;
+}
+
+/* Retail / Grocery — warm red */
+.theme-retail {
+  --primary: oklch(0.55 0.22 27);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.65 0.20 27);
+  --radius: 0.375rem;
+}
+
+/* Healthcare — calm teal */
+.theme-healthcare {
+  --primary: oklch(0.52 0.12 196);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.62 0.12 196);
+  --radius: 0.625rem;
+}
+
+/* Pharmacy — blue-violet */
+.theme-chemist {
+  --primary: oklch(0.45 0.18 260);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.58 0.18 260);
+  --radius: 0.25rem;
+}
+
+/* Grocery — brand red (e.g. Coles) */
+.theme-coles {
+  --primary: oklch(0.55 0.22 27);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.65 0.20 27);
+  --radius: 0.375rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}

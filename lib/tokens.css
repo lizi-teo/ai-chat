@@ -1,0 +1,85 @@
+/*
+  Design Token Reference — @lizi-teo/ai-chat-ui
+  ================================================
+  Override any of these CSS custom properties inside a ThemeProvider
+  to apply your client's brand. All components in this package
+  read exclusively from these variables — no hardcoded colours.
+
+  Usage (via ThemeProvider):
+    <ThemeProvider tokens={{
+      '--primary': '#004f2d',
+      '--primary-foreground': '#ffffff',
+      '--radius': '0.25rem',
+    }}>
+      <ChatWindow ... />
+    </ThemeProvider>
+
+  Usage (plain CSS):
+    .my-brand {
+      --primary: #004f2d;
+      --radius: 0.25rem;
+    }
+
+  All values use oklch() by default. You may substitute any valid
+  CSS color (hex, rgb, hsl, oklch) when overriding.
+*/
+
+/* ── Colour tokens ─────────────────────────────────────────────── */
+
+/* Page / surface backgrounds */
+/* --background          oklch(1 0 0)           White — main page surface */
+/* --foreground          oklch(0.145 0 0)        Near-black — default text */
+
+/* Card / panel */
+/* --card                oklch(1 0 0)            Card background */
+/* --card-foreground     oklch(0.145 0 0)        Card text */
+
+/* Popover / dropdown */
+/* --popover             oklch(1 0 0)            Popover background */
+/* --popover-foreground  oklch(0.145 0 0)        Popover text */
+
+/* Brand primary — buttons, user chat bubbles, key CTAs */
+/* --primary             oklch(0.205 0 0)        Dark neutral — override with brand colour */
+/* --primary-foreground  oklch(0.985 0 0)        Text on primary backgrounds */
+
+/* Secondary — softer actions, secondary buttons */
+/* --secondary           oklch(0.97 0 0)         Light grey */
+/* --secondary-foreground oklch(0.205 0 0)       Dark text on secondary */
+
+/* Muted — assistant chat bubbles, placeholder areas, disabled states */
+/* --muted               oklch(0.97 0 0)         Subtle background */
+/* --muted-foreground    oklch(0.556 0 0)        Subdued text (assistant messages, captions) */
+
+/* Accent — hover states, highlights */
+/* --accent              oklch(0.97 0 0)         Hover surface */
+/* --accent-foreground   oklch(0.205 0 0)        Text on accent */
+
+/* Destructive — errors, allergy warnings, delete actions, cart badge */
+/* --destructive         oklch(0.577 0.245 27.325) Red */
+
+/* Form / input chrome */
+/* --border              oklch(0.922 0 0)        Dividers, card borders */
+/* --input               oklch(0.922 0 0)        Input field border */
+/* --ring                oklch(0.708 0 0)        Focus ring */
+
+/* ── Shape tokens ──────────────────────────────────────────────── */
+
+/* Base border radius — all components scale from this single value */
+/* --radius              0.625rem                Override to 0 for sharp, 1rem for pill */
+/*   Derived automatically — do not override these directly:        */
+/*   --radius-sm  = radius * 0.6                                    */
+/*   --radius-md  = radius * 0.8                                    */
+/*   --radius-lg  = radius                                          */
+/*   --radius-xl  = radius * 1.4                                    */
+/*   --radius-2xl = radius * 1.8                                    */
+
+/* ── Typography tokens ─────────────────────────────────────────── */
+
+/* Font families — set via CSS variable to avoid loading two font stacks */
+/* --font-sans           system-ui, sans-serif   Override with Google Font or brand font */
+/* --font-mono           monospace               Used in code/dosage displays            */
+
+/* ── Dark mode ─────────────────────────────────────────────────── */
+/* All tokens above have dark-mode counterparts defined in globals.css under .dark {}  */
+/* Dark mode activates when an ancestor element has class="dark".                       */
+/* ThemeProvider accepts a `dark` prop to apply the .dark class automatically.          */

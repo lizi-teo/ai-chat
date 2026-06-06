@@ -1,0 +1,69 @@
+@AGENTS.md
+
+# ai-chat-ui
+
+White-label AI chat component library (`@lizi-teo/ai-chat-ui`) published to npm. Consumers install this package and apply their brand via `ThemeProvider` or a `.theme-{client}` CSS class. **This is a library, not a standalone app.**
+
+## Dev environment
+
+```bash
+npm run storybook    # ← primary dev environment (port 6006)
+npm run dev          # Next.js preview harness only
+```
+
+Always develop and test components in Storybook, not the Next.js app.
+
+## Project structure
+
+```
+components/
+  primitives/         # Tier 1 — zero-dep, token-styled atoms (StatusBadge, PriceDisplay, etc.)
+  core/               # Tier 2 — compound components, documented as "Components" (MediaCard, DetailList, etc.)
+  layouts/            # Tier 3 — structural skeletons with named slots (ListingLayout, ChatWindow, etc.)
+  ui/                 # shadcn primitives (Button only — do not add to this folder)
+  ThemeProvider.tsx   # Runtime theme injection
+playbook/             # Docs only — maps layouts to industry scenarios (no code)
+lib/
+  tokens.css          # Token reference docs (comments only — consumers read this)
+  theme-config.ts     # Design constants (ICON_STROKE_WIDTH)
+app/
+  globals.css         # CSS baseline + client theme classes
+.storybook/
+  preview.tsx         # Storybook themes list — keep in sync with globals.css
+.docs/
+  plans/              # Architecture decision docs
+  ui-guidelines       # CSS architecture, responsive, a11y, component rules
+  motion-guidelines   # Animation system, framer-motion patterns
+```
+
+**Dependency direction:** primitives ← core ← layouts. Never sideways, never upward. A primitive must not import from core or layouts. A core component must not import from layouts.
+
+## CSS: 3-layer cascade
+
+| Layer | Location | Use for |
+|-------|----------|---------|
+| 1. Base | `globals.css :root` | Warm neutral defaults — do not edit for client work |
+| 2. Theme class | `globals.css .theme-{client}` | Static brand overrides (primary, radius, etc.) |
+| 3. Runtime | `<ThemeProvider tokens={…}>` | Dynamic JS-driven overrides |
+
+**Adding a new client theme**: edit `globals.css` (add `.theme-x`) AND `.storybook/preview.tsx` (add to themes object). Both must stay in sync.
+
+## Non-negotiable rules
+
+1. **No hardcoded styles** — no `#hex`, `rgb()`, `bg-blue-500`, or literal spacing values. Every value goes through a CSS custom property.
+2. **shadcn `Button` only** — never raw `<button className="…">`. Import from `@/components/ui/button`.
+3. **Responsive at every breakpoint** — `md:` variants are mandatory on all sizes and spacing. `h-12 md:h-10` on every interactive element. `p-4 md:p-6 lg:p-8` on every container.
+4. **No new dependencies without asking** — published library; every added dep becomes a consumer's dep too.
+5. **New components follow atomic tiers** — Primitives in `components/primitives/`, Components in `components/core/`, Layouts in `components/layouts/`. Each gets its own subfolder with `ComponentName.tsx` + `ComponentName.stories.tsx`.
+6. **Compound component API** — Components and Layouts expose sub-components as static properties (`MediaCard.Title`, `ListingLayout.Header`, etc.). Sub-components live in the same file as the parent.
+7. **Every component needs a `.stories.tsx`** — Storybook is the contract for consumers.
+
+## #ui
+
+When `#ui` appears in a prompt, read `.docs/ui-guidelines` in full and apply every rule from it before writing any code.
+
+## #motion
+
+When `#motion` appears in a prompt, read `.docs/motion-guidelines` in full and apply every rule from it before writing any animation or transition code.
+
+Use `#ui #motion` together when building or updating any component that animates.

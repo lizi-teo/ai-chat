@@ -1,0 +1,257 @@
+## Motion Design System
+
+Animation is part of the product, not decoration. Every component should feel alive — responsive to input, smooth in transition, and confident in movement. The goal is an immersive, premium experience that matches the quality of Airbnb or Qantas.
+
+All animation uses **framer-motion**. Do not use CSS keyframes or `transition` for anything more than color/shadow changes on hover.
+
+---
+
+## Duration Tokens
+
+| Token | Value | Use for |
+|-------|-------|---------|
+| `instant` | 100ms | Hover fills, icon swaps, color changes |
+| `fast` | 200ms | Element enter/exit, tooltips, badges |
+| `base` | 300ms | Drawer open, modal appear, tab switch |
+| `slow` | 500ms | Page transitions, hero reveals, onboarding |
+
+**Rule**: UI responses should complete in ≤300ms. Longer feels broken, not cinematic.
+
+---
+
+## Easing Tokens
+
+```typescript
+export const ease = {
+  out:    [0.0, 0.0, 0.2, 1.0],  // entering — decelerate to rest  ← use most often
+  in:     [0.4, 0.0, 1.0, 1.0],  // exiting  — accelerate out
+  inOut:  [0.4, 0.0, 0.2, 1.0],  // repositioning — smooth both ends
+  spring: { type: 'spring', stiffness: 320, damping: 28 } as const,
+  // spring is for interactive press/release only
+}
+```
+
+**Rule**: Never use `linear` for UI motion. Never use `ease-in` for elements entering the screen.
+
+---
+
+## Core Animation Patterns
+
+### Fade Up (default for most elements)
+Cards, messages, list items, form sections appearing:
+```tsx
+initial={{ opacity: 0, y: 10 }}
+animate={{ opacity: 1, y: 0 }}
+exit={{ opacity: 0, y: 6 }}
+transition={{ duration: 0.2, ease: [0, 0, 0.2, 1] }}
+```
+
+### Scale In (popovers, tooltips, modals, dropdowns)
+```tsx
+initial={{ opacity: 0, scale: 0.95 }}
+animate={{ opacity: 1, scale: 1 }}
+exit={{ opacity: 0, scale: 0.95 }}
+transition={{ duration: 0.15, ease: [0, 0, 0.2, 1] }}
+```
+
+### Slide In (drawers, sidebars, bottom sheets)
+```tsx
+// Right drawer
+initial={{ x: '100%' }}
+animate={{ x: 0 }}
+exit={{ x: '100%' }}
+transition={{ duration: 0.3, ease: [0, 0, 0.2, 1] }}
+
+// Bottom sheet (mobile)
+initial={{ y: '100%' }}
+animate={{ y: 0 }}
+exit={{ y: '100%' }}
+transition={{ duration: 0.3, ease: [0, 0, 0.2, 1] }}
+```
+
+### Stagger (lists, grids, option sets)
+```tsx
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.05, delayChildren: 0.05 },
+  },
+}
+const itemVariants = {
+  hidden: { opacity: 0, y: 10 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.2, ease: [0, 0, 0.2, 1] } },
+}
+
+<motion.ul variants={containerVariants} initial="hidden" animate="show">
+  {items.map((item) => (
+    <motion.li key={item.id} variants={itemVariants}>{item.label}</motion.li>
+  ))}
+</motion.ul>
+```
+
+---
+
+## Interactive Feedback
+
+### Hover Lift (cards, product cards, pattern components)
+```tsx
+<motion.div
+  whileHover={{ y: -3, transition: { duration: 0.2, ease: [0, 0, 0.2, 1] } }}
+  className="cursor-pointer"
+>
+```
+Pair with `className="transition-shadow duration-200 hover:shadow-md"` for depth.
+
+### Press (buttons, CTAs, icon buttons)
+```tsx
+<motion.div whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}>
+```
+Do **not** apply `whileTap` to the shadcn `Button` directly — wrap the container or use CSS `active:scale-[0.97]` instead.
+
+### Icon Button Hover
+```tsx
+<motion.div whileHover={{ scale: 1.12, transition: { duration: 0.15 } }}>
+  <Button size="icon" aria-label="Send message"><ArrowUp size={18} /></Button>
+</motion.div>
+```
+
+---
+
+## AnimatePresence Rules
+
+Wrap **every** conditional render that should animate in/out:
+
+```tsx
+import { AnimatePresence, motion } from 'framer-motion'
+
+<AnimatePresence initial={false}>
+  {isVisible && (
+    <motion.div
+      key="unique-stable-key"   // ← required. must not change between renders
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 6 }}
+      transition={{ duration: 0.2, ease: [0, 0, 0.2, 1] }}
+    >
+      {children}
+    </motion.div>
+  )}
+</AnimatePresence>
+```
+
+| `mode` | Use when |
+|--------|----------|
+| default | List items, tooltips, badges — siblings animate independently |
+| `mode="wait"` | Page/tab transitions — old exits before new enters |
+| `mode="popLayout"` | Reordering lists — siblings shift smoothly to fill gaps |
+
+**Rule**: Always provide an `exit` variant. An element that just pops out of existence is a bug.
+
+---
+
+## Layout Animations
+
+Use the `layout` prop to automatically animate size and position changes — no manual math needed:
+
+```tsx
+// Expanding card, growing input, shifting layout on toggle
+<motion.div layout transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}>
+
+// Animating height (e.g., accordion, collapsible)
+<motion.div layout="size">
+```
+
+**Rule**: When a component changes size or position due to state (not navigation), use `layout` prop instead of manually animating dimensions.
+
+---
+
+## Chat-Specific Patterns
+
+### Message Bubble Entrance
+Bubbles slide up with a slight scale — implemented in `MessageBubble.tsx`:
+```tsx
+initial={{ opacity: 0, y: 8, scale: 0.97 }}
+animate={{ opacity: 1, y: 0, scale: 1 }}
+transition={{ duration: 0.2, ease: [0, 0, 0.2, 1] }}
+```
+
+### Typing Indicator
+Three-dot bounce with staggered delay — implemented in `TypingIndicator.tsx`.
+Wrap the whole indicator in `AnimatePresence` so it fades in/out smoothly.
+
+### Streaming Text
+No animation needed on the text fill — the natural character-by-character arrival is the effect.
+Animate the **bubble container** entering, not the text inside it.
+
+### Empty → First Message
+Wrap the empty state in `AnimatePresence` with `key="empty"` so it fades out gracefully before the first bubble appears.
+
+### Input Focus
+Use CSS for the ring transition (framer-motion is overkill here):
+```tsx
+className="focus:ring-2 focus:ring-ring transition-shadow duration-150"
+```
+
+---
+
+## Reduced Motion (mandatory)
+
+Always respect the user's system preference:
+
+```tsx
+import { useReducedMotion } from 'framer-motion'
+
+function MessageBubble({ ... }) {
+  const shouldReduce = useReducedMotion()
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: shouldReduce ? 0 : 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: shouldReduce ? 0.01 : 0.2 }}
+    >
+  )
+}
+```
+
+**Rule**: When `useReducedMotion()` is true — keep opacity transitions (they aid comprehension) but remove all positional movement (y, x, scale).
+
+---
+
+## Motion Checklist
+
+### Before Writing
+- [ ] Is this motion communicating something (state change, relationship, sequence) or just decorating?
+- [ ] Would removing this animation confuse the user? If not, reconsider it.
+
+### During Implementation
+- [ ] `ease.out` on enter, `ease.in` on exit — never `linear`
+- [ ] Duration ≤ 200ms for element entry/exit, ≤ 300ms for panels/modals
+- [ ] `AnimatePresence` wraps every conditional render that animates
+- [ ] Stable `key` on every `AnimatePresence` child
+- [ ] `exit` variant defined — elements never just disappear
+- [ ] `useReducedMotion()` check — remove y/scale when true, keep opacity
+
+### Post-Implementation
+- [ ] Does it feel instant enough? (if it feels slow, halve the duration)
+- [ ] Do 3+ things animate simultaneously? If yes, sequence them instead
+- [ ] Test with `prefers-reduced-motion: reduce` in browser DevTools
+
+---
+
+## Common Mistakes
+
+**❌ DON'T:**
+- Animate opacity-only — always pair with y or scale for depth
+- Use `ease-in` for entering elements — it starts slow, feels laggy
+- Skip `exit` — disappearing without animation is jarring
+- Animate 3+ unrelated things at once — stagger or sequence them
+- Use `whileHover` on the entire page layout — scope to the interactive element
+- Set duration > 300ms for any UI response
+
+**✅ DO:**
+- `ease.out` for entries (decelerate to rest = feels natural)
+- Stagger lists with `staggerChildren: 0.05` — not longer
+- `layout` prop for size/position changes — framer-motion does the math
+- Subtle lift (`y: -3`) + shadow transition for hover on cards
+- Keep streaming text animation-free — the fill itself is the motion
