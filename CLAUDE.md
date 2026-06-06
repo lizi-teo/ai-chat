@@ -32,7 +32,9 @@ app/
   preview.tsx         # Storybook themes list — keep in sync with globals.css
 .docs/
   plans/              # Architecture decision docs
-  ui-guidelines       # CSS architecture, responsive, a11y, component rules
+  guidelines/
+    ui-guidelines     # CSS architecture, responsive, a11y, component rules
+    style-guidelines  # Clean look design language — colors, radius, shadows, typography
   motion-guidelines   # Animation system, framer-motion patterns
 ```
 
@@ -42,7 +44,7 @@ app/
 
 | Layer | Location | Use for |
 |-------|----------|---------|
-| 1. Base | `globals.css :root` | Warm neutral defaults — do not edit for client work |
+| 1. Base | `globals.css :root` | Clean look defaults (cool off-white, 12px radius, soft shadows) — do not edit for client work |
 | 2. Theme class | `globals.css .theme-{client}` | Static brand overrides (primary, radius, etc.) |
 | 3. Runtime | `<ThemeProvider tokens={…}>` | Dynamic JS-driven overrides |
 
@@ -60,7 +62,7 @@ app/
 
 ## #ui
 
-When `#ui` appears in a prompt, read `.docs/guidelines/ui-guidelines` in full and apply every rule from it before writing any code.
+When `#ui` appears in a prompt, read `.docs/guidelines/ui-guidelines` AND `.docs/guidelines/style-guidelines` in full and apply every rule from both before writing any code.
 
 ## #motion
 

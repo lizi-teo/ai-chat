@@ -65,19 +65,32 @@
 /* ── Shape tokens ──────────────────────────────────────────────── */
 
 /* Base border radius — all components scale from this single value */
-/* --radius              0.625rem                Override to 0 for sharp, 1rem for pill */
+/* --radius              0.75rem                 Override to 0 for sharp, 1.5rem for very rounded */
 /*   Derived automatically — do not override these directly:        */
-/*   --radius-sm  = radius * 0.6                                    */
-/*   --radius-md  = radius * 0.8                                    */
-/*   --radius-lg  = radius                                          */
-/*   --radius-xl  = radius * 1.4                                    */
-/*   --radius-2xl = radius * 1.8                                    */
+/*   --radius-sm  = radius * 0.6   (~7px)   small badges, tiny chips   */
+/*   --radius-md  = radius * 0.8   (~10px)  inputs, small buttons      */
+/*   --radius-lg  = radius         (12px)   standard buttons, badges   */
+/*   --radius-xl  = radius * 1.4   (~17px)  cards, panels              */
+/*   --radius-2xl = radius * 1.8   (~22px)  large cards, modals        */
+/*   --radius-3xl = radius * 2.2   (~26px)  floating chat window       */
 
 /* ── Typography tokens ─────────────────────────────────────────── */
 
 /* Font families — set via CSS variable to avoid loading two font stacks */
 /* --font-sans           system-ui, sans-serif   Override with Google Font or brand font */
 /* --font-mono           monospace               Used in code/dosage displays            */
+
+/* ── Shadow tokens ─────────────────────────────────────────────── */
+
+/* Cool-tinted, diffuse elevation — never dark or warm            */
+/* --shadow-sm       Subtle lift — input focus, small floaters    */
+/* --shadow-card     Standard card / panel elevation              */
+/* --shadow-bubble   Chat message bubble                          */
+/* --shadow-elevated Modals, dropdowns, popovers                  */
+/*                                                                 */
+/* Usage — use CSS var() syntax in Tailwind:                      */
+/*   shadow-[var(--shadow-card)]                                   */
+/* Never use Tailwind's shadow-lg/shadow-xl — too dark and warm.  */
 
 /* ── Dark mode ─────────────────────────────────────────────────── */
 /* All tokens above have dark-mode counterparts defined in globals.css under .dark {}  */

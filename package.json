@@ -1,6 +1,6 @@
 {
   "name": "@lizi-teo/ai-chat-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "White-label AI chat component library for retail, pharmacy, grocery, travel and insurance chatbots",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

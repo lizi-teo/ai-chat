@@ -7,6 +7,8 @@ export default defineConfig({
       entry: {
         index: path.resolve(__dirname, 'index.ts'),
         primitives: path.resolve(__dirname, 'components/primitives/index.ts'),
+        core: path.resolve(__dirname, 'components/core/index.ts'),
+        layouts: path.resolve(__dirname, 'components/layouts/index.ts'),
         'components/ui/button': path.resolve(__dirname, 'components/ui/button.tsx'),
         'lib/utils': path.resolve(__dirname, 'lib/utils.ts'),
         'lib/theme-config': path.resolve(__dirname, 'lib/theme-config.ts'),

@@ -15,3 +15,12 @@ export type { TagProps } from './Tag/Tag'
 
 export { ProgressStep, progressStepDotBase, progressStepStatusClasses } from './ProgressStep/ProgressStep'
 export type { ProgressStepProps } from './ProgressStep/ProgressStep'
+
+export { WaveformIndicator } from './WaveformIndicator/WaveformIndicator'
+export type { WaveformIndicatorProps } from './WaveformIndicator/WaveformIndicator'
+
+export { MorphingBlob } from './MorphingBlob/MorphingBlob'
+export type { MorphingBlobProps } from './MorphingBlob/MorphingBlob'
+
+export { SkeletonBlock } from './SkeletonBlock/SkeletonBlock'
+export type { SkeletonBlockProps } from './SkeletonBlock/SkeletonBlock'
