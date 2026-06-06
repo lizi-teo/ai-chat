@@ -27,9 +27,8 @@ export default defineConfig({
         /^next/,
       ],
       output: {
-        preserveModules: true,
-        preserveModulesRoot: '.',
         entryFileNames: '[name].js',
+        chunkFileNames: 'chunks/[name]-[hash].js',
       },
     },
   },
