@@ -48,7 +48,7 @@ export function ProgressStep({ status, label, className }: ProgressStepProps) {
           <motion.div
             className="absolute inset-0 rounded-full border-2 border-primary"
             animate={{ scale: [1, 1.6, 1], opacity: [0.6, 0, 0.6] }}
-            transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 1.2, repeat: Infinity, ease: [0.4, 0, 0.2, 1] }}
           />
         )}
       </div>

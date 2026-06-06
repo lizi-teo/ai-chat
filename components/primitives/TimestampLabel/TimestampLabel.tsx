@@ -23,7 +23,9 @@ function formatRelative(datetime: string): string {
     const hrs = Math.floor(diffSec / 3600)
     return `${hrs} hr ago`
   }
-  return new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' }).format(date)
+  const opts: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' }
+  if (date.getFullYear() !== new Date().getFullYear()) opts.year = 'numeric'
+  return new Intl.DateTimeFormat(undefined, opts).format(date)
 }
 
 export function TimestampLabel({ datetime, className }: TimestampLabelProps) {

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
+import { Button } from '@/components/ui/button'
 import {
   StatusBadge,
   PriceDisplay,
@@ -62,8 +63,8 @@ export function App() {
 
         <section className="space-y-3">
           <h2 className="text-lg md:text-xl font-semibold text-foreground">Tag</h2>
-          <AnimatePresence mode="popLayout">
-            <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
+            <AnimatePresence mode="popLayout">
               {tags.map((tag) => (
                 <Tag
                   key={tag}
@@ -71,15 +72,16 @@ export function App() {
                   onRemove={() => setTags((prev) => prev.filter((t) => t !== tag))}
                 />
               ))}
-            </div>
-          </AnimatePresence>
+            </AnimatePresence>
+          </div>
           {tags.length === 0 && (
-            <button
-              className="text-xs md:text-sm text-muted-foreground underline"
+            <Button
+              variant="link"
+              className="h-auto p-0 text-xs md:text-sm"
               onClick={() => setTags(['Economy', 'Direct', 'Morning'])}
             >
               Reset
-            </button>
+            </Button>
           )}
         </section>
 

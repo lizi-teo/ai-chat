@@ -27,8 +27,8 @@ export const RemovableList: Story = {
   render: () => {
     const [tags, setTags] = useState(['Economy', 'Direct', 'Morning'])
     return (
-      <AnimatePresence mode="popLayout">
-        <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2">
+        <AnimatePresence mode="popLayout">
           {tags.map((tag) => (
             <Tag
               key={tag}
@@ -36,8 +36,8 @@ export const RemovableList: Story = {
               onRemove={() => setTags((prev) => prev.filter((t) => t !== tag))}
             />
           ))}
-        </div>
-      </AnimatePresence>
+        </AnimatePresence>
+      </div>
     )
   },
 }
