@@ -14,10 +14,27 @@
       "import": "./dist/primitives.js",
       "types": "./dist/components/primitives/index.d.ts"
     },
+    "./plain": {
+      "import": "./dist-plain/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./plain/primitives": {
+      "import": "./dist-plain/primitives.js",
+      "types": "./dist/components/primitives/index.d.ts"
+    },
+    "./plain/core": {
+      "import": "./dist-plain/core.js",
+      "types": "./dist/components/core/index.d.ts"
+    },
+    "./plain/layouts": {
+      "import": "./dist-plain/layouts.js",
+      "types": "./dist/components/layouts/index.d.ts"
+    },
     "./styles": "./app/globals.css"
   },
   "files": [
     "dist",
+    "dist-plain",
     "app/globals.css"
   ],
   "repository": {
@@ -28,6 +45,7 @@
     "dev": "vite",
     "next": "next dev",
     "build": "vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
+    "build:plain": "vite build --config vite.plain.config.ts",
     "build:next": "next build",
     "start": "next start",
     "lint": "eslint",

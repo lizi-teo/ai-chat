@@ -1,0 +1,44 @@
+import { defineConfig } from 'vite'
+import path from 'path'
+
+export default defineConfig({
+  build: {
+    lib: {
+      entry: {
+        index: path.resolve(__dirname, 'index.ts'),
+        primitives: path.resolve(__dirname, 'components/primitives/index.ts'),
+        core: path.resolve(__dirname, 'components/core/index.ts'),
+        layouts: path.resolve(__dirname, 'components/layouts/index.ts'),
+        'components/ui/button': path.resolve(__dirname, 'components/ui/button.tsx'),
+        'lib/utils': path.resolve(__dirname, 'lib/utils.ts'),
+        'lib/theme-config': path.resolve(__dirname, 'lib/theme-config.ts'),
+      },
+      formats: ['es'],
+    },
+    outDir: 'dist-plain',
+    emptyOutDir: true,
+    copyPublicDir: false,
+    rollupOptions: {
+      external: [
+        'react',
+        'react/jsx-runtime',
+        'react-dom',
+        /^@anthropic-ai/,
+        /^next/,
+      ],
+      output: {
+        entryFileNames: '[name].js',
+        chunkFileNames: 'chunks/[name]-[hash].js',
+      },
+    },
+  },
+  esbuild: {
+    jsx: 'automatic',
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '.'),
+      'framer-motion': path.resolve(__dirname, 'lib/motion-stub.tsx'),
+    },
+  },
+})
