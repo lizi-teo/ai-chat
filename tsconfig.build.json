@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationDir": "dist",
+    "outDir": "dist",
+    "moduleResolution": "bundler",
+    "tsBuildInfoFile": ".tsbuildinfo-lib",
+    "plugins": []
+  },
+  "include": [
+    "index.ts",
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "lib/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.stories.tsx",
+    "demo/**/*",
+    "app/**/*"
+  ]
+}
