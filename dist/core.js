@@ -1,3 +1,13 @@
-import { a as e, i as t, n, r, t as i } from "./chunks/ActionStrip-Cl4Az2xG.js";
-import { a, i as o, n as s, o as c, r as l, s as u, t as d } from "./chunks/core-B9CNgAQn.js";
-export { i as ActionStrip, s as CardStack, l as CardStrip, t as ChatInput, d as ChipToCard, c as DetailList, n as MediaCard, e as MessageBubble, r as QuickReplies, o as SelectionGroup, a as SummaryPanel, u as TypingIndicator };
+import { MessageBubble as e } from "./components/core/MessageBubble/MessageBubble.js";
+import { TypingIndicator as t } from "./components/core/TypingIndicator/TypingIndicator.js";
+import { ChatInput as n } from "./components/core/ChatInput/ChatInput.js";
+import { QuickReplies as r } from "./components/core/QuickReplies/QuickReplies.js";
+import { MediaCard as i } from "./components/core/MediaCard/MediaCard.js";
+import { DetailList as a } from "./components/core/DetailList/DetailList.js";
+import { ActionStrip as o } from "./components/core/ActionStrip/ActionStrip.js";
+import { SummaryPanel as s } from "./components/core/SummaryPanel/SummaryPanel.js";
+import { SelectionGroup as c } from "./components/core/SelectionGroup/SelectionGroup.js";
+import { CardStrip as l } from "./components/core/CardStrip/CardStrip.js";
+import { CardStack as u } from "./components/core/CardStack/CardStack.js";
+import { ChipToCard as d } from "./components/core/ChipToCard/ChipToCard.js";
+export { o as ActionStrip, u as CardStack, l as CardStrip, n as ChatInput, d as ChipToCard, a as DetailList, i as MediaCard, e as MessageBubble, r as QuickReplies, c as SelectionGroup, s as SummaryPanel, t as TypingIndicator };
