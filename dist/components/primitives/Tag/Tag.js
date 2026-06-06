@@ -1,13 +1,14 @@
 "use client";
 import { cn as e } from "../../../lib/utils.js";
-import { Button as t } from "../../ui/button.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { X as i } from "lucide-react";
-import { motion as a, useReducedMotion as o } from "framer-motion";
+import { X as t } from "../../../node_modules/lucide-react/dist/esm/icons/x.js";
+import { motion as n } from "../../../node_modules/framer-motion/dist/es/render/components/motion/proxy.js";
+import { useReducedMotion as r } from "../../../node_modules/framer-motion/dist/es/utils/reduced-motion/use-reduced-motion.js";
+import { Button as i } from "../../ui/button.js";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region components/primitives/Tag/Tag.tsx
 function s({ label: s, onRemove: c, className: l }) {
-	let u = o();
-	return /* @__PURE__ */ r(a.span, {
+	let u = r();
+	return /* @__PURE__ */ o(n.span, {
 		layout: !0,
 		initial: {
 			opacity: 0,
@@ -31,13 +32,13 @@ function s({ label: s, onRemove: c, className: l }) {
 			]
 		},
 		className: e("inline-flex items-center gap-1 rounded-full bg-secondary text-secondary-foreground px-2.5 py-0.5 text-xs md:text-sm", l),
-		children: [s, c && /* @__PURE__ */ n(t, {
+		children: [s, c && /* @__PURE__ */ a(i, {
 			variant: "ghost",
 			size: "icon-xs",
 			"aria-label": `Remove ${s}`,
 			onClick: c,
 			className: "size-3.5 md:size-3 rounded-full p-0",
-			children: /* @__PURE__ */ n(i, { className: "size-2.5" })
+			children: /* @__PURE__ */ a(t, { className: "size-2.5" })
 		})]
 	});
 }

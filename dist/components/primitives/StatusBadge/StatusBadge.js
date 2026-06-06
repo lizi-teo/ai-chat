@@ -1,6 +1,6 @@
-import { cn as e } from "../../../lib/utils.js";
-import { jsx as t } from "react/jsx-runtime";
-import { cva as n } from "class-variance-authority";
+import { cva as e } from "../../../node_modules/class-variance-authority/dist/index.js";
+import { cn as t } from "../../../lib/utils.js";
+import { jsx as n } from "react/jsx-runtime";
 //#region components/primitives/StatusBadge/StatusBadge.tsx
 var r = "inline-flex items-center rounded-full px-2 py-0.5 text-xs md:text-sm font-medium", i = {
 	default: "bg-muted text-muted-foreground",
@@ -8,14 +8,14 @@ var r = "inline-flex items-center rounded-full px-2 py-0.5 text-xs md:text-sm fo
 	warning: "bg-warning/10 text-warning",
 	error: "bg-destructive/10 text-destructive",
 	info: "bg-primary/10 text-primary"
-}, a = n(r, {
+}, a = e(r, {
 	variants: { variant: i },
 	defaultVariants: { variant: "default" }
 });
-function o({ label: n, variant: r, className: i }) {
-	return /* @__PURE__ */ t("span", {
-		className: e(a({ variant: r }), i),
-		children: n
+function o({ label: e, variant: r, className: i }) {
+	return /* @__PURE__ */ n("span", {
+		className: t(a({ variant: r }), i),
+		children: e
 	});
 }
 //#endregion

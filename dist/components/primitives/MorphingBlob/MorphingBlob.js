@@ -1,7 +1,8 @@
 "use client";
 import { cn as e } from "../../../lib/utils.js";
-import { jsx as t } from "react/jsx-runtime";
-import { motion as n, useReducedMotion as r } from "framer-motion";
+import { motion as t } from "../../../node_modules/framer-motion/dist/es/render/components/motion/proxy.js";
+import { useReducedMotion as n } from "../../../node_modules/framer-motion/dist/es/utils/reduced-motion/use-reduced-motion.js";
+import { jsx as r } from "react/jsx-runtime";
 //#region components/primitives/MorphingBlob/MorphingBlob.tsx
 var i = {
 	sm: "size-8",
@@ -14,8 +15,8 @@ var i = {
 	"60% 40% 55% 45% / 45% 55% 45% 55%"
 ];
 function o({ size: o = "md", className: s }) {
-	let c = r();
-	return /* @__PURE__ */ t(n.div, {
+	let c = n();
+	return /* @__PURE__ */ r(t.div, {
 		"aria-hidden": "true",
 		className: e("bg-muted-foreground/20", i[o], s),
 		animate: { borderRadius: c ? "50%" : a },

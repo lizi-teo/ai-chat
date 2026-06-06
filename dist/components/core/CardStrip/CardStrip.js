@@ -1,17 +1,18 @@
 "use client";
 import { cn as e } from "../../../lib/utils.js";
-import { jsx as t } from "react/jsx-runtime";
-import { motion as n, useReducedMotion as r } from "framer-motion";
+import { motion as t } from "../../../node_modules/framer-motion/dist/es/render/components/motion/proxy.js";
+import { useReducedMotion as n } from "../../../node_modules/framer-motion/dist/es/utils/reduced-motion/use-reduced-motion.js";
+import { jsx as r } from "react/jsx-runtime";
 //#region components/core/CardStrip/CardStrip.tsx
-function i({ children: n, className: r }) {
-	return /* @__PURE__ */ t("div", {
-		className: e("snap-start shrink-0 w-[280px] md:w-[300px]", r),
-		children: n
+function i({ children: t, className: n }) {
+	return /* @__PURE__ */ r("div", {
+		className: e("snap-start shrink-0 w-[280px] md:w-[300px]", n),
+		children: t
 	});
 }
 function a({ children: i, className: a }) {
-	let o = r();
-	return /* @__PURE__ */ t(n.div, {
+	let o = n();
+	return /* @__PURE__ */ r(t.div, {
 		initial: {
 			opacity: 0,
 			y: o ? 0 : 8

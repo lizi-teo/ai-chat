@@ -1,11 +1,12 @@
 "use client";
 import { cn as e } from "../../../lib/utils.js";
-import { jsx as t } from "react/jsx-runtime";
-import { motion as n, useReducedMotion as r } from "framer-motion";
+import { motion as t } from "../../../node_modules/framer-motion/dist/es/render/components/motion/proxy.js";
+import { useReducedMotion as n } from "../../../node_modules/framer-motion/dist/es/utils/reduced-motion/use-reduced-motion.js";
+import { jsx as r } from "react/jsx-runtime";
 //#region components/core/TypingIndicator/TypingIndicator.tsx
 function i({ className: i }) {
-	let a = r();
-	return /* @__PURE__ */ t(n.div, {
+	let a = n();
+	return /* @__PURE__ */ r(t.div, {
 		initial: {
 			opacity: 0,
 			y: a ? 0 : 6,
@@ -36,7 +37,7 @@ function i({ className: i }) {
 			0,
 			1,
 			2
-		].map((e) => /* @__PURE__ */ t(n.span, {
+		].map((e) => /* @__PURE__ */ r(t.span, {
 			animate: a ? { opacity: [
 				.4,
 				1,

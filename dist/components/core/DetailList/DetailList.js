@@ -1,7 +1,8 @@
 "use client";
 import { cn as e } from "../../../lib/utils.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { motion as r, useReducedMotion as i } from "framer-motion";
+import { motion as t } from "../../../node_modules/framer-motion/dist/es/render/components/motion/proxy.js";
+import { useReducedMotion as n } from "../../../node_modules/framer-motion/dist/es/utils/reduced-motion/use-reduced-motion.js";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region components/core/DetailList/DetailList.tsx
 var a = {
 	hidden: {},
@@ -35,21 +36,21 @@ var a = {
 	}
 };
 function c({ label: a, value: c, className: l }) {
-	let u = i();
-	return /* @__PURE__ */ n(r.div, {
+	let u = n();
+	return /* @__PURE__ */ i(t.div, {
 		variants: u ? s : o,
 		className: e("flex items-center justify-between gap-4 py-2 md:py-2.5", "border-b border-border last:border-0", l),
-		children: [/* @__PURE__ */ t("span", {
+		children: [/* @__PURE__ */ r("span", {
 			className: "text-xs md:text-sm text-muted-foreground shrink-0",
 			children: a
-		}), /* @__PURE__ */ t("span", {
+		}), /* @__PURE__ */ r("span", {
 			className: "text-xs md:text-sm text-foreground font-medium text-right",
 			children: c
 		})]
 	});
 }
 function l({ className: n, children: i }) {
-	return /* @__PURE__ */ t(r.div, {
+	return /* @__PURE__ */ r(t.div, {
 		variants: a,
 		initial: "hidden",
 		animate: "show",

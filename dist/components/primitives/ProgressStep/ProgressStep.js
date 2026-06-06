@@ -1,8 +1,10 @@
 "use client";
 import { cn as e } from "../../../lib/utils.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { Check as r } from "lucide-react";
-import { AnimatePresence as i, motion as a, useReducedMotion as o } from "framer-motion";
+import { Check as t } from "../../../node_modules/lucide-react/dist/esm/icons/check.js";
+import { AnimatePresence as n } from "../../../node_modules/framer-motion/dist/es/components/AnimatePresence/index.js";
+import { motion as r } from "../../../node_modules/framer-motion/dist/es/render/components/motion/proxy.js";
+import { useReducedMotion as i } from "../../../node_modules/framer-motion/dist/es/utils/reduced-motion/use-reduced-motion.js";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region components/primitives/ProgressStep/ProgressStep.tsx
 var s = "size-3 md:size-3.5 rounded-full border-2 flex items-center justify-center", c = {
 	pending: "bg-muted border-border",
@@ -10,15 +12,15 @@ var s = "size-3 md:size-3.5 rounded-full border-2 flex items-center justify-cent
 	complete: "bg-primary border-primary"
 };
 function l({ status: l, label: u, className: d }) {
-	let f = o();
-	return /* @__PURE__ */ n("div", {
+	let f = i();
+	return /* @__PURE__ */ o("div", {
 		className: e("inline-flex flex-col items-center gap-1", d),
 		"aria-current": l === "active" ? "step" : void 0,
-		children: [/* @__PURE__ */ n("div", {
+		children: [/* @__PURE__ */ o("div", {
 			className: "relative",
-			children: [/* @__PURE__ */ t("div", {
+			children: [/* @__PURE__ */ a("div", {
 				className: e(s, c[l]),
-				children: /* @__PURE__ */ t(i, { children: l === "complete" && /* @__PURE__ */ t(a.span, {
+				children: /* @__PURE__ */ a(n, { children: l === "complete" && /* @__PURE__ */ a(r.span, {
 					initial: {
 						opacity: 0,
 						scale: f ? 1 : .5
@@ -41,12 +43,12 @@ function l({ status: l, label: u, className: d }) {
 						]
 					},
 					className: "flex items-center justify-center",
-					children: /* @__PURE__ */ t(r, {
+					children: /* @__PURE__ */ a(t, {
 						className: "size-2 md:size-2.5 text-primary-foreground",
 						strokeWidth: 3
 					})
 				}, "check") })
-			}), l === "active" && !f && /* @__PURE__ */ t(a.div, {
+			}), l === "active" && !f && /* @__PURE__ */ a(r.div, {
 				className: "absolute inset-0 rounded-full border-2 border-primary",
 				animate: {
 					scale: [
@@ -71,7 +73,7 @@ function l({ status: l, label: u, className: d }) {
 					]
 				}
 			})]
-		}), u && /* @__PURE__ */ t("span", {
+		}), u && /* @__PURE__ */ a("span", {
 			className: "text-xs md:text-sm text-muted-foreground",
 			children: u
 		})]

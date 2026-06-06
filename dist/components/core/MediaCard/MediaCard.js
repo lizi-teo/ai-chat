@@ -1,51 +1,52 @@
 "use client";
 import { cn as e } from "../../../lib/utils.js";
-import { jsx as t } from "react/jsx-runtime";
-import { motion as n, useReducedMotion as r } from "framer-motion";
+import { motion as t } from "../../../node_modules/framer-motion/dist/es/render/components/motion/proxy.js";
+import { useReducedMotion as n } from "../../../node_modules/framer-motion/dist/es/utils/reduced-motion/use-reduced-motion.js";
+import { jsx as r } from "react/jsx-runtime";
 //#region components/core/MediaCard/MediaCard.tsx
-function i({ src: n, alt: r, className: i }) {
-	return /* @__PURE__ */ t("div", {
+function i({ src: t, alt: n, className: i }) {
+	return /* @__PURE__ */ r("div", {
 		className: e("overflow-hidden rounded-t-xl", i),
-		children: /* @__PURE__ */ t("img", {
-			src: n,
-			alt: r,
+		children: /* @__PURE__ */ r("img", {
+			src: t,
+			alt: n,
 			className: "w-full h-40 md:h-48 object-cover"
 		})
 	});
 }
-function a({ children: n, className: r }) {
-	return /* @__PURE__ */ t("div", {
-		className: e("p-4 md:p-5 flex flex-col gap-2", r),
-		children: n
+function a({ children: t, className: n }) {
+	return /* @__PURE__ */ r("div", {
+		className: e("p-4 md:p-5 flex flex-col gap-2", n),
+		children: t
 	});
 }
-function o({ children: n, className: r }) {
-	return /* @__PURE__ */ t("h3", {
-		className: e("font-semibold text-sm md:text-base text-foreground leading-snug", r),
-		children: n
+function o({ children: t, className: n }) {
+	return /* @__PURE__ */ r("h3", {
+		className: e("font-semibold text-sm md:text-base text-foreground leading-snug", n),
+		children: t
 	});
 }
-function s({ children: n, className: r }) {
-	return /* @__PURE__ */ t("p", {
-		className: e("text-xs md:text-sm text-muted-foreground", r),
-		children: n
+function s({ children: t, className: n }) {
+	return /* @__PURE__ */ r("p", {
+		className: e("text-xs md:text-sm text-muted-foreground", n),
+		children: t
 	});
 }
-function c({ children: n, className: r }) {
-	return /* @__PURE__ */ t("div", {
-		className: e("flex", r),
-		children: n
+function c({ children: t, className: n }) {
+	return /* @__PURE__ */ r("div", {
+		className: e("flex", n),
+		children: t
 	});
 }
-function l({ children: n, className: r }) {
-	return /* @__PURE__ */ t("div", {
-		className: e("flex items-center gap-1.5 text-xs md:text-sm", r),
-		children: n
+function l({ children: t, className: n }) {
+	return /* @__PURE__ */ r("div", {
+		className: e("flex items-center gap-1.5 text-xs md:text-sm", n),
+		children: t
 	});
 }
 function u({ className: i, children: a }) {
-	let o = r();
-	return /* @__PURE__ */ t(n.div, {
+	let o = n();
+	return /* @__PURE__ */ r(t.div, {
 		initial: {
 			opacity: 0,
 			y: o ? 0 : 10
