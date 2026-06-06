@@ -30,7 +30,6 @@
     "build": "vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
     "build:next": "next build",
     "start": "next start",
-    "prepare": "npm run build",
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
