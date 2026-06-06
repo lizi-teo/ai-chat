@@ -1,2 +1,2 @@
-import { t as e } from "./chunks/layouts-Bx8UHVDW.js";
+import { t as e } from "./chunks/layouts-n4DUWwKF.js";
 export { e as ChatWidget };

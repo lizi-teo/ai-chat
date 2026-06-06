@@ -1,6 +1,6 @@
-import { _ as e, b as t, x as n } from "./primitives-CmcLfdl_.js";
-import { t as r } from "./utils-DFf2kDEH.js";
-import { a as i, i as a, n as o, r as s, t as c } from "./ActionStrip-Cv5B75rv.js";
+import { t as e } from "./utils-DFf2kDEH.js";
+import { d as t, h as n, m as r } from "./primitives-C7qjhGUg.js";
+import { a as i, i as a, n as o, r as s, t as c } from "./ActionStrip-Cl4Az2xG.js";
 import { jsx as l, jsxs as u } from "react/jsx-runtime";
 import { useEffect as d, useRef as f } from "react";
 var p = {
@@ -107,11 +107,11 @@ function m({ vertical: m = "grocery", mockData: h, onAddToCart: g, onSuggestSubs
 	return d(() => {
 		x.current?.scrollIntoView({ behavior: "instant" });
 	}, []), /* @__PURE__ */ u("div", {
-		className: r("flex flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-[var(--shadow-card)]", y),
+		className: e("flex flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-[var(--shadow-card)]", y),
 		children: [
 			/* @__PURE__ */ u("div", {
 				className: "flex items-center gap-3 px-4 md:px-5 py-3 md:py-4 border-b border-border bg-card shrink-0",
-				children: [/* @__PURE__ */ l(e, {
+				children: [/* @__PURE__ */ l(t, {
 					fallback: b.botName ?? "Assistant",
 					src: b.avatar,
 					size: "sm"
@@ -122,7 +122,7 @@ function m({ vertical: m = "grocery", mockData: h, onAddToCart: g, onSuggestSubs
 			}),
 			/* @__PURE__ */ u("div", {
 				className: "flex-1 overflow-y-auto min-h-0 px-4 md:px-5 py-4 md:py-5 flex flex-col gap-3 md:gap-4",
-				children: [b.messages.map((e, r) => /* @__PURE__ */ u("div", {
+				children: [b.messages.map((e, t) => /* @__PURE__ */ u("div", {
 					className: "flex flex-col gap-2",
 					children: [
 						/* @__PURE__ */ l(i, {
@@ -131,7 +131,7 @@ function m({ vertical: m = "grocery", mockData: h, onAddToCart: g, onSuggestSubs
 						}),
 						e.products && /* @__PURE__ */ l("div", {
 							className: "flex gap-3 overflow-x-auto pb-1 scrollbar-none",
-							children: e.products.map((e, r) => /* @__PURE__ */ l("div", {
+							children: e.products.map((e, t) => /* @__PURE__ */ l("div", {
 								className: "w-52 md:w-60 shrink-0",
 								children: /* @__PURE__ */ u(o, { children: [
 									e.image && /* @__PURE__ */ l(o.Media, {
@@ -147,7 +147,7 @@ function m({ vertical: m = "grocery", mockData: h, onAddToCart: g, onSuggestSubs
 											}) })]
 										}),
 										e.subtitle && /* @__PURE__ */ l(o.Subtitle, { children: e.subtitle }),
-										/* @__PURE__ */ l(o.Meta, { children: /* @__PURE__ */ l(t, {
+										/* @__PURE__ */ l(o.Meta, { children: /* @__PURE__ */ l(r, {
 											amount: e.price,
 											currency: "AUD"
 										}) })
@@ -160,7 +160,7 @@ function m({ vertical: m = "grocery", mockData: h, onAddToCart: g, onSuggestSubs
 										children: e.secondaryAction
 									})] })
 								] })
-							}, r))
+							}, t))
 						}),
 						e.quickReplies && e.role === "bot" && /* @__PURE__ */ l("div", { children: /* @__PURE__ */ l(s, {
 							options: e.quickReplies,
@@ -169,7 +169,7 @@ function m({ vertical: m = "grocery", mockData: h, onAddToCart: g, onSuggestSubs
 							}
 						}) })
 					]
-				}, r)), /* @__PURE__ */ l("div", { ref: x })]
+				}, t)), /* @__PURE__ */ l("div", { ref: x })]
 			}),
 			/* @__PURE__ */ l("div", {
 				className: "border-t border-border px-4 md:px-5 py-3 md:py-4 shrink-0",

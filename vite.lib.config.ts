@@ -23,6 +23,7 @@ export default defineConfig({
         'react',
         'react/jsx-runtime',
         'react-dom',
+        'motion',
         /^@anthropic-ai/,
         /^next/,
       ],
@@ -37,6 +38,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      'framer-motion': 'motion',
       '@': path.resolve(__dirname, '.'),
     },
   },
