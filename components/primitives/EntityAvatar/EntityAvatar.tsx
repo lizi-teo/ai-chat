@@ -1,15 +1,17 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
-const avatarVariants = cva(
-  'inline-flex shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground font-medium overflow-hidden',
-  {
+export const entityAvatarBase = 'inline-flex shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground font-medium overflow-hidden'
+
+export const entityAvatarSizeClasses = {
+  sm: 'size-7 text-xs',
+  md: 'size-10 text-sm',
+  lg: 'size-14 text-base',
+}
+
+const avatarVariants = cva(entityAvatarBase, {
     variants: {
-      size: {
-        sm: 'size-7 text-xs',
-        md: 'size-10 text-sm',
-        lg: 'size-14 text-base',
-      },
+      size: entityAvatarSizeClasses,
     },
     defaultVariants: {
       size: 'md',

@@ -199,6 +199,65 @@ Delete `components/patterns/` entirely. Delete `components/chat/ProductCard.tsx`
 
 ---
 
+## Component extension pattern
+
+Components in this library are designed to be extended, not forked. There are two layers of extension depending on what needs changing.
+
+### Extend variants (new semantic states)
+
+Components with structured variants export their styling primitives — the base class string and the variant class map. Consumers spread these to build extended versions without copying the component.
+
+```tsx
+import { cva } from 'class-variance-authority'
+import {
+  statusBadgeBase,
+  statusBadgeVariantClasses,
+} from '@lizi-teo/ai-chat-ui/primitives'
+
+const myBadgeVariants = cva(statusBadgeBase, {
+  variants: {
+    variant: {
+      ...statusBadgeVariantClasses,   // keeps default/success/warning/error/info
+      loyalty: 'bg-[--loyalty]/10 text-[--loyalty]',  // consumer defines --loyalty token
+      vip: 'bg-[--vip]/10 text-[--vip]',
+    },
+  },
+  defaultVariants: { variant: 'default' },
+})
+```
+
+The rule still applies: custom variants must use CSS custom properties, not hardcoded colours. Define `--loyalty` and `--vip` in your theme class or ThemeProvider.
+
+### Exports per primitive
+
+| Component | Exported primitives |
+|---|---|
+| `StatusBadge` | `statusBadgeBase`, `statusBadgeVariantClasses` |
+| `EntityAvatar` | `entityAvatarBase`, `entityAvatarSizeClasses` |
+| `ProgressStep` | `progressStepDotBase`, `progressStepStatusClasses` |
+| `PriceDisplay` | `className` prop only — no structured variants |
+| `TimestampLabel` | `className` prop only — no structured variants |
+| `Tag` | `className` prop only — no structured variants |
+
+### Override layout or structure (className)
+
+For components without variant exports, pass `className` directly. All primitives accept it and merge via `cn()`.
+
+```tsx
+<Tag label="Express" className="bg-primary/10 text-primary border border-primary/20" />
+```
+
+Again: token classes only (`bg-primary/10`, `text-[--loyalty]`), not hardcoded values.
+
+### When to add a variant to the library vs extend locally
+
+- **Add to library** — the variant is semantically meaningful to all consumers (e.g. a `neutral` state that belongs alongside `success`/`warning`)
+- **Extend locally** — the variant is brand-specific (e.g. `loyalty`, `vip`, `member-gold`)
+
+Brand-specific variants belong in the consuming project, not this library.
+
+---
+
 ## Conventions
 
 - Every component gets its own folder: `ComponentName/ComponentName.tsx` + `ComponentName.stories.tsx`
@@ -206,6 +265,7 @@ Delete `components/patterns/` entirely. Delete `components/chat/ProductCard.tsx`
 - All animation via `framer-motion`, following `.docs/motion-guidelines`
 - `shadcn Button` (`components/ui/button.tsx`) is the only raw button allowed
 - No hardcoded colours or spacing — everything through CSS tokens
+- Components with CVA variants export their base class and variant map for consumer extension
 
 ---
 

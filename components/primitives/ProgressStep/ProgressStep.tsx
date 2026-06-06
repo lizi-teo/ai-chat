@@ -10,9 +10,9 @@ export interface ProgressStepProps {
   className?: string
 }
 
-const dotBase = 'size-3 md:size-3.5 rounded-full border-2 flex items-center justify-center'
+export const progressStepDotBase = 'size-3 md:size-3.5 rounded-full border-2 flex items-center justify-center'
 
-const dotStyles = {
+export const progressStepStatusClasses = {
   pending: 'bg-muted border-border',
   active: 'bg-primary/20 border-primary ring-2 ring-primary/30',
   complete: 'bg-primary border-primary',
@@ -27,7 +27,7 @@ export function ProgressStep({ status, label, className }: ProgressStepProps) {
       aria-current={status === 'active' ? 'step' : undefined}
     >
       <div className="relative">
-        <div className={cn(dotBase, dotStyles[status])}>
+        <div className={cn(progressStepDotBase, progressStepStatusClasses[status])}>
           <AnimatePresence>
             {status === 'complete' && (
               <motion.span

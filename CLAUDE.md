@@ -60,7 +60,7 @@ app/
 
 ## #ui
 
-When `#ui` appears in a prompt, read `.docs/ui-guidelines` in full and apply every rule from it before writing any code.
+When `#ui` appears in a prompt, read `.docs/guidelines/ui-guidelines` in full and apply every rule from it before writing any code.
 
 ## #motion
 

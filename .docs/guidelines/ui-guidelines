@@ -168,6 +168,66 @@ Message bubbles: `max-w-[75%] md:max-w-sm` — constrain width to preserve reada
 
 ---
 
+## Component Extension
+
+Components ship with exportable styling primitives so consumers can extend variants without forking source files.
+
+### Adding a custom variant
+
+Components with CVA variants export a `*Base` string and a `*VariantClasses` / `*StatusClasses` / `*SizeClasses` object. Spread these to build an extended CVA config:
+
+```tsx
+import { cva } from 'class-variance-authority'
+import { statusBadgeBase, statusBadgeVariantClasses } from '@lizi-teo/ai-chat-ui/primitives'
+
+const extendedVariants = cva(statusBadgeBase, {
+  variants: {
+    variant: {
+      ...statusBadgeVariantClasses,
+      vip: 'bg-[--vip]/10 text-[--vip]',        // ← token class, not hardcoded colour
+    },
+  },
+  defaultVariants: { variant: 'default' },
+})
+```
+
+Then render with your own wrapper component that accepts the extended type.
+
+**Rule: custom variants must use CSS custom properties.** Define `--vip` in your `.theme-{client}` class or `ThemeProvider` tokens. Never use `bg-yellow-400` or `#hex` directly.
+
+### Overriding style with className
+
+All primitives accept `className`. Use it with token-based Tailwind classes when a variant export isn't needed:
+
+```tsx
+<Tag label="Express" className="bg-primary/10 text-primary" />
+```
+
+### Extending sizes
+
+`EntityAvatar` exports `entityAvatarSizeClasses`. Add extra sizes the same way:
+
+```tsx
+import { entityAvatarBase, entityAvatarSizeClasses } from '@lizi-teo/ai-chat-ui/primitives'
+
+const myAvatarVariants = cva(entityAvatarBase, {
+  variants: {
+    size: { ...entityAvatarSizeClasses, xl: 'size-20 text-lg' },
+  },
+  defaultVariants: { size: 'md' },
+})
+```
+
+### What belongs in the library vs your project
+
+| Add to library | Keep in your project |
+|---|---|
+| Semantically universal variants (`neutral`, `pending`) | Brand-specific variants (`vip`, `loyalty`, `member-gold`) |
+| New size tokens used by multiple tiers | One-off size overrides |
+| Structural changes to a component | Cosmetic theme differences |
+
+---
+
 ## Component Creation Checklist
 
 ### Before Writing Code
