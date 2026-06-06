@@ -2,7 +2,7 @@
 
 import { useState, useRef, useLayoutEffect, Children } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { cn } from '@/lib/utils'
+import { cn } from '../../../lib/utils'
 
 const MAX_ITEMS = 5
 const COLLAPSED_OFFSET = 6

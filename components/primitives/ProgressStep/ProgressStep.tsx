@@ -2,7 +2,7 @@
 
 import { Check } from 'lucide-react'
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
-import { cn } from '@/lib/utils'
+import { cn } from '../../../lib/utils'
 
 export interface ProgressStepProps {
   status: 'pending' | 'active' | 'complete'

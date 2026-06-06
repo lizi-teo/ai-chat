@@ -3,8 +3,8 @@
 import { createContext, useContext, useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { Button } from '../../ui/button'
+import { cn } from '../../../lib/utils'
 
 interface SummaryPanelContextValue {
   isOpen: boolean

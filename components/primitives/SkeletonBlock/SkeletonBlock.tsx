@@ -1,7 +1,7 @@
 'use client'
 
 import { useReducedMotion } from 'framer-motion'
-import { cn } from '@/lib/utils'
+import { cn } from '../../../lib/utils'
 
 export interface SkeletonBlockProps {
   shape: 'line' | 'heading' | 'code' | 'bullet-list'

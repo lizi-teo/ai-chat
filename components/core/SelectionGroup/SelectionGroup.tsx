@@ -3,7 +3,7 @@
 import { createContext, useContext, useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Check } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from '../../../lib/utils'
 
 type SelectionType = 'radio' | 'checkbox'
 

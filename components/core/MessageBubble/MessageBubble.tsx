@@ -2,8 +2,8 @@
 
 import { createContext, useContext } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { cn } from '@/lib/utils'
-import { EntityAvatar, type EntityAvatarProps, TimestampLabel } from '@/components/primitives'
+import { cn } from '../../../lib/utils'
+import { EntityAvatar, type EntityAvatarProps, TimestampLabel } from '../../primitives'
 
 type Role = 'user' | 'assistant'
 
