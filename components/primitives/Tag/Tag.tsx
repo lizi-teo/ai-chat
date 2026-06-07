@@ -1,7 +1,7 @@
 'use client'
 
 import { X } from 'lucide-react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion } from 'motion/react'
 import { Button } from '../../ui/button'
 import { cn } from '../../../lib/utils'
 

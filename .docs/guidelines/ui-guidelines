@@ -80,11 +80,17 @@ Industry starting points:
 ### Typography (Progressive)
 | Element | Classes |
 |---------|---------|
-| H1 | `text-2xl md:text-3xl lg:text-4xl font-bold` |
-| H2 | `text-xl md:text-2xl lg:text-3xl font-semibold` |
-| H3 | `text-lg md:text-xl font-semibold` |
+| Display / Hero | `text-3xl md:text-4xl font-semibold` |
+| H1 | `text-2xl md:text-3xl font-semibold` |
+| H2 | `text-xl md:text-2xl font-semibold` |
+| H3 | `text-base md:text-lg font-semibold` |
 | Body | `text-sm md:text-base` |
 | Caption | `text-xs md:text-sm` |
+| Amount hero | `text-3xl md:text-4xl font-semibold tabular-nums` |
+
+> **Fluid alternative**: `text-[clamp(1.5rem,4vw,2.25rem)]` scales smoothly between breakpoints without jumps — use for splash/onboarding text only; components should use the table above for predictability.
+
+**Note on constrained components** (ModalSheet, ApplePaySheet, bottom drawers): these are always capped at `max-w-md` or `max-w-lg` regardless of viewport. Typography inside them may use a fixed size class (e.g. `text-[25px]` for branded native-style headers) — this is acceptable. All other dimensions must still use Tailwind classes, not inline styles.
 
 Content widths: `max-w-prose` (reading), `max-w-4xl` (forms), `max-w-7xl` (dashboard)
 
@@ -259,6 +265,8 @@ const myAvatarVariants = cva(entityAvatarBase, {
 - Skip `md:` variants — every component must scale
 - Big breakpoint jumps (`px-4 lg:px-32`)
 - Build for desktop first, then try to shrink to mobile
+- `style={{ width: X, height: X }}` for dimensions — inline styles bypass Tailwind's responsive system entirely. Use `size-*`, `w-*`, `h-*` classes so `md:` variants remain available
+- `text-[18px]`, `text-[25px]` without an `md:` pair — use the typography table above or approve the exception explicitly (constrained native-style components only)
 
 **✅ DO:**
 - Search repo before creating anything new

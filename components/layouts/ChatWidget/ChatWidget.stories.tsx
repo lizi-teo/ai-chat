@@ -18,6 +18,24 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const MobileFullscreen: Story = {
+  name: 'Mobile fullscreen',
+  args: { vertical: 'grocery', className: 'rounded-none border-0 shadow-none' },
+  decorators: [
+    (Story) => (
+      <div className="h-dvh w-full">
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: {
+    layout: 'fullscreen',
+    viewport: {
+      defaultViewport: 'mobile1',
+    },
+  },
+}
+
 export const Grocery: Story = {
   name: 'Grocery (Coles)',
   args: { vertical: 'grocery' },

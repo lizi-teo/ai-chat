@@ -51,6 +51,12 @@ app/
 
 **Adding a new client theme**: edit `theme.css` (add `.theme-x`) AND `.storybook/preview.tsx` (add to themes object). Both must stay in sync.
 
+## Third-party assets
+
+Payment logos are **not bundled**. Consumers source official brand assets from each network's
+brand portal and place them in `public/payment-logos/`. See `components/primitives/payment-logos/README.md`
+for required file paths and download links.
+
 ## Non-negotiable rules
 
 1. **No hardcoded styles** — no `#hex`, `rgb()`, `bg-blue-500`, or literal spacing values. Every value goes through a CSS custom property.
@@ -70,3 +76,9 @@ When `#ui` appears in a prompt, read `.docs/guidelines/ui-guidelines` AND `.docs
 When `#motion` appears in a prompt, read `.docs/motion-guidelines` in full and apply every rule from it before writing any animation or transition code.
 
 Use `#ui #motion` together when building or updating any component that animates.
+
+### #fig
+When I type `#fig`, use Figma MCP commands in this order:
+- **Get variables (ALWAYS REQUIRED - must be done FIRST)**
+- Get code
+- Get image

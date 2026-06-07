@@ -1,9 +1,12 @@
 'use client'
 
 import { createContext, useContext, useState } from 'react'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { Check } from 'lucide-react'
 import { cn } from '../../../lib/utils'
+import { Button } from '../../ui/button'
+
+const MotionButton = motion(Button)
 
 type SelectionType = 'radio' | 'checkbox'
 
@@ -59,17 +62,17 @@ function Option({ value, children, description, icon, className }: OptionProps) 
   const isSelected = selected.includes(value)
 
   return (
-    <motion.button
+    <MotionButton
       variants={shouldReduce ? optionVariantsReduced : optionVariants}
       onClick={() => toggle(value)}
       role={type}
       aria-checked={isSelected}
+      variant="ghost"
       className={cn(
-        'w-full flex items-center gap-3 rounded-xl px-4 py-3.5 md:py-4 text-left',
+        'w-full h-auto flex items-center gap-3 rounded-xl px-4 py-3.5 md:py-4 text-left',
         'transition-colors duration-150',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
         isSelected
-          ? 'border-2 border-primary bg-primary/5 shadow-[var(--shadow-card)]'
+          ? 'border-2 border-primary bg-primary/5 shadow-[var(--shadow-card)] hover:bg-primary/5'
           : 'border border-border bg-card shadow-[var(--shadow-sm)] hover:border-primary/40 hover:bg-muted/30 hover:shadow-[var(--shadow-card)]',
         className
       )}
@@ -113,7 +116,7 @@ function Option({ value, children, description, icon, className }: OptionProps) 
           )}
         </AnimatePresence>
       </div>
-    </motion.button>
+    </MotionButton>
   )
 }
 

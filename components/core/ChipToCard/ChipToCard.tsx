@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useId } from 'react'
-import { motion, AnimatePresence, LayoutGroup, useReducedMotion } from 'framer-motion'
+import { motion, AnimatePresence, LayoutGroup, useReducedMotion } from 'motion/react'
 import { Button } from '../../ui/button'
 import { cn } from '../../../lib/utils'
 

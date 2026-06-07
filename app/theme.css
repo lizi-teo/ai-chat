@@ -1,66 +1,60 @@
-/* ── Design tokens — override with .theme-{client} or ThemeProvider ── */
+/* ─────────────────────────────────────────────────────────────────────────────
+   DESIGN TOKENS  —  three tiers, override only what your brand requires.
+
+   TIER 1  BRAND      Typeface, action color, shape, background tint.
+                      These ~6 tokens define a brand. Override in .theme-{client}.
+
+   TIER 2  SEMANTIC   Surfaces that adapt to the brand palette.
+                      Correct defaults ship here — override only when brand demands.
+
+   TIER 3  SYSTEM     Library internals: shadows, Apple Pay, charts, layout.
+                      Do not override in client themes.
+────────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  --font-sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
 
-  /* Cool off-white — subtle blue-gray tint, airy and fresh */
+  /* ── TIER 1: BRAND ────────────────────────────────────────────────────── */
+
+  /* Typeface — replace with any Google Font or system stack */
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Page surface — cool off-white; tint toward brand hue for stronger identity */
   --background: oklch(0.97 0.007 248);
-  /* Deep cool charcoal — clear contrast without harshness */
   --foreground: oklch(0.14 0.010 258);
 
-  /* Pure white cards float clearly above the cool background */
+  /* Action color — near-black default; replace with any brand colour */
+  --primary: oklch(0.13 0 0);
+  --primary-foreground: oklch(0.98 0 0);
+
+  /* Shape language — 12 px modern clean; sharper (0.375rem) or rounder (1rem) per brand */
+  --radius: 0.75rem;
+
+  /* ── TIER 2: SEMANTIC ─────────────────────────────────────────────────── */
+
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.14 0.010 258);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.14 0.010 258);
 
-  /* Near-black — clean grayscale default, replace with any brand colour */
-  --primary: oklch(0.13 0 0);
-  --primary-foreground: oklch(0.98 0 0);
-
-  /* Cool light grey for secondary actions */
   --secondary: oklch(0.96 0.006 248);
   --secondary-foreground: oklch(0.14 0.010 258);
 
-  /* Muted — assistant bubbles, placeholders, disabled */
   --muted: oklch(0.94 0.008 248);
   --muted-foreground: oklch(0.50 0.010 258);
 
-  /* Hover/focus surface */
   --accent: oklch(0.96 0.006 248);
   --accent-foreground: oklch(0.14 0.010 258);
 
-  /* Errors, warnings, delete actions */
   --destructive: oklch(0.577 0.245 27.325);
-
-  /* Cool grey borders — subtle, keeps surfaces crisp */
-  --border: oklch(0.90 0.007 248);
-  --input: oklch(0.90 0.007 248);
-  /* Dark gray focus ring — matches grayscale primary */
-  --ring: oklch(0.40 0 0);
-
-  /* Charts */
-  --chart-1: oklch(0.55 0.14 243);
-  --chart-2: oklch(0.62 0.12 180);
-  --chart-3: oklch(0.58 0.14 140);
-  --chart-4: oklch(0.68 0.14 60);
-  --chart-5: oklch(0.62 0.16 25);
-
-  /* Semantic status colors — used by StatusBadge and other state indicators */
   --success: oklch(0.50 0.15 150);
   --success-foreground: oklch(0.98 0 0);
   --warning: oklch(0.72 0.16 75);
   --warning-foreground: oklch(0.14 0.010 258);
 
-  /* Base radius — 12px modern clean, all variants derive from this */
-  --radius: 0.75rem;
-
-  /* Elevation shadows — cool-tinted, diffuse, featherlight */
-  --shadow-sm: 0 1px 4px oklch(0 0 0 / 0.04), 0 1px 2px oklch(0 0 0 / 0.02);
-  --shadow-card: 0 2px 12px oklch(0 0 0 / 0.06), 0 1px 4px oklch(0 0 0 / 0.03);
-  --shadow-bubble: 0 1px 8px oklch(0 0 0 / 0.05), 0 0.5px 2px oklch(0 0 0 / 0.02);
-  --shadow-elevated: 0 4px 24px oklch(0 0 0 / 0.08), 0 2px 8px oklch(0 0 0 / 0.04);
+  --border: oklch(0.90 0.007 248);
+  --input: oklch(0.90 0.007 248);
+  /* Focus ring — set to match primary hue in client themes */
+  --ring: oklch(0.40 0 0);
 
   --sidebar: oklch(0.96 0.007 248);
   --sidebar-foreground: oklch(0.14 0.010 258);
@@ -70,18 +64,48 @@
   --sidebar-accent-foreground: oklch(0.14 0.010 258);
   --sidebar-border: oklch(0.90 0.007 248);
   --sidebar-ring: oklch(0.40 0 0);
+
+  /* ── TIER 3: SYSTEM ───────────────────────────────────────────────────── */
+
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+  --font-apple: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', ui-sans-serif, system-ui, sans-serif;
+
+  /* Elevation shadows — cool-tinted, diffuse, featherlight */
+  --shadow-sm:       0 1px 4px oklch(0 0 0 / 0.04), 0 1px 2px oklch(0 0 0 / 0.02);
+  --shadow-card:     0 2px 12px oklch(0 0 0 / 0.06), 0 1px 4px oklch(0 0 0 / 0.03);
+  --shadow-bubble:   0 1px 8px oklch(0 0 0 / 0.05), 0 0.5px 2px oklch(0 0 0 / 0.02);
+  --shadow-elevated: 0 4px 24px oklch(0 0 0 / 0.08), 0 2px 8px oklch(0 0 0 / 0.04);
+
+  /* Apple Pay brand tokens — do not modify */
+  --apple-pay-blue: oklch(0.61 0.236 258);
+  --apple-pay-surface: oklch(0.07 0.010 258);
+  --apple-fills-tertiary: rgba(118, 118, 128, 0.12);
+  --apple-fills-tertiary-hover: rgba(118, 118, 128, 0.20);
+  --apple-labels-vibrant-secondary: #999999;
+
+  /* Data visualisation palette */
+  --chart-1: oklch(0.55 0.14 243);
+  --chart-2: oklch(0.62 0.12 180);
+  --chart-3: oklch(0.58 0.14 140);
+  --chart-4: oklch(0.68 0.14 60);
+  --chart-5: oklch(0.62 0.16 25);
 }
 
+/* ── Dark mode ────────────────────────────────────────────────────────────── */
+
 .dark {
+
+  /* TIER 1 */
   --background: oklch(0.13 0.010 258);
   --foreground: oklch(0.97 0.004 248);
+  --primary: oklch(0.93 0 0);
+  --primary-foreground: oklch(0.13 0 0);
+
+  /* TIER 2 */
   --card: oklch(0.18 0.010 258);
   --card-foreground: oklch(0.97 0.004 248);
   --popover: oklch(0.18 0.010 258);
   --popover-foreground: oklch(0.97 0.004 248);
-  /* Near-white — inverted grayscale primary for dark mode */
-  --primary: oklch(0.93 0 0);
-  --primary-foreground: oklch(0.13 0 0);
   --secondary: oklch(0.23 0.010 258);
   --secondary-foreground: oklch(0.97 0.004 248);
   --muted: oklch(0.23 0.010 258);
@@ -96,16 +120,6 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 14%);
   --ring: oklch(0.65 0 0);
-
-  --shadow-sm: 0 1px 4px oklch(0 0 0 / 0.20), 0 1px 2px oklch(0 0 0 / 0.14);
-  --shadow-card: 0 2px 12px oklch(0 0 0 / 0.28), 0 1px 4px oklch(0 0 0 / 0.18);
-  --shadow-bubble: 0 1px 8px oklch(0 0 0 / 0.24), 0 0.5px 2px oklch(0 0 0 / 0.14);
-  --shadow-elevated: 0 4px 24px oklch(0 0 0 / 0.36), 0 2px 8px oklch(0 0 0 / 0.22);
-  --chart-1: oklch(0.62 0.14 243);
-  --chart-2: oklch(0.68 0.12 180);
-  --chart-3: oklch(0.62 0.14 140);
-  --chart-4: oklch(0.70 0.14 60);
-  --chart-5: oklch(0.65 0.16 25);
   --sidebar: oklch(0.18 0.010 258);
   --sidebar-foreground: oklch(0.97 0.004 248);
   --sidebar-primary: oklch(0.93 0 0);
@@ -114,48 +128,18 @@
   --sidebar-accent-foreground: oklch(0.97 0.004 248);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.65 0 0);
-}
 
-/* ── Client theme overrides ──────────────────────────────────────── */
-/* Layer 2: static per-client classes. See .docs/ui-guidelines for   */
-/* layer 3 (runtime ThemeProvider tokens).                           */
-
-/* Travel / Airlines — sky blue */
-.theme-travel {
-  --primary: oklch(0.42 0.16 245);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.55 0.16 245);
-  --radius: 0.75rem;
-}
-
-/* Retail / Grocery — warm red */
-.theme-retail {
-  --primary: oklch(0.55 0.22 27);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.65 0.20 27);
-  --radius: 0.75rem;
-}
-
-/* Healthcare — calm teal */
-.theme-healthcare {
-  --primary: oklch(0.52 0.12 196);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.62 0.12 196);
-  --radius: 0.75rem;
-}
-
-/* Pharmacy — blue-violet */
-.theme-chemist {
-  --primary: oklch(0.45 0.18 260);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.58 0.18 260);
-  --radius: 0.75rem;
-}
-
-/* Grocery — brand red (e.g. Coles) */
-.theme-coles {
-  --primary: oklch(0.55 0.22 27);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.65 0.20 27);
-  --radius: 0.75rem;
+  /* TIER 3 */
+  --apple-pay-surface: oklch(0.12 0.010 258);
+  --apple-fills-tertiary: rgba(118, 118, 128, 0.24);
+  --apple-fills-tertiary-hover: rgba(118, 118, 128, 0.32);
+  --shadow-sm:       0 1px 4px oklch(0 0 0 / 0.20), 0 1px 2px oklch(0 0 0 / 0.14);
+  --shadow-card:     0 2px 12px oklch(0 0 0 / 0.28), 0 1px 4px oklch(0 0 0 / 0.18);
+  --shadow-bubble:   0 1px 8px oklch(0 0 0 / 0.24), 0 0.5px 2px oklch(0 0 0 / 0.14);
+  --shadow-elevated: 0 4px 24px oklch(0 0 0 / 0.36), 0 2px 8px oklch(0 0 0 / 0.22);
+  --chart-1: oklch(0.62 0.14 243);
+  --chart-2: oklch(0.68 0.12 180);
+  --chart-3: oklch(0.62 0.14 140);
+  --chart-4: oklch(0.70 0.14 60);
+  --chart-5: oklch(0.65 0.16 25);
 }

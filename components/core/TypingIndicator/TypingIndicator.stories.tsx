@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'motion/react'
 import { Button } from '@/components/ui/button'
 import { TypingIndicator } from './TypingIndicator'
 

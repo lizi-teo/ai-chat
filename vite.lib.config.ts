@@ -23,7 +23,7 @@ export default defineConfig({
         'react',
         'react/jsx-runtime',
         'react-dom',
-        /^framer-motion/,
+        /^motion/,
         /^lucide-react/,
         'class-variance-authority',
         'clsx',

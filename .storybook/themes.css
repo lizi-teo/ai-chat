@@ -1,0 +1,56 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   STORYBOOK DEMO THEMES
+
+   Example .theme-{client} overrides for the Storybook theme switcher.
+   These are not shipped with the library — consumers define their own.
+
+   Each theme overrides only TIER 1 (brand) tokens. Six tokens is all it takes
+   to fully rebrand: font, primary pair, background tint, radius, ring.
+────────────────────────────────────────────────────────────────────────────── */
+
+/* Travel / Airlines ── sky blue, slightly rounded, airy background */
+.theme-travel {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --background: oklch(0.97 0.008 245);
+  --primary: oklch(0.42 0.16 245);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.55 0.16 245);
+  --radius: 0.75rem;
+}
+
+/* Retail / Grocery ── warm red, sharper corners, warm background tint */
+.theme-retail {
+  --background: oklch(0.98 0.004 30);
+  --primary: oklch(0.55 0.22 27);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.65 0.20 27);
+  --radius: 0.5rem;
+}
+
+/* Healthcare ── calm teal, rounder corners, subtle cool tint */
+.theme-healthcare {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --background: oklch(0.97 0.006 196);
+  --primary: oklch(0.52 0.12 196);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.62 0.12 196);
+  --radius: 1rem;
+}
+
+/* Chemist Warehouse ── blue-violet, sharp corners, neutral background */
+.theme-chemist {
+  --background: oklch(0.97 0.007 260);
+  --primary: oklch(0.45 0.18 260);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.58 0.18 260);
+  --radius: 0.5rem;
+}
+
+/* Coles ── brand red, sharp corners, warm background tint */
+.theme-coles {
+  --background: oklch(0.98 0.004 30);
+  --primary: oklch(0.55 0.22 27);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.65 0.20 27);
+  --radius: 0.5rem;
+}

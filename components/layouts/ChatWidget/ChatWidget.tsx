@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useCallback, useState } from 'react'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { cn } from '../../../lib/utils'
 import { MessageBubble } from '../../core/MessageBubble/MessageBubble'
 import { ChatInput } from '../../core/ChatInput/ChatInput'

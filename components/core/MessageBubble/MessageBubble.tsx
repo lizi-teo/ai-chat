@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState } from 'react'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { ThumbsUp, ThumbsDown } from 'lucide-react'
 import { cn } from '../../../lib/utils'
 import { Button } from '../../ui/button'

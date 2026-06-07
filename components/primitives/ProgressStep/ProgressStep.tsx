@@ -1,7 +1,7 @@
 'use client'
 
 import { Check } from 'lucide-react'
-import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
+import { motion, useReducedMotion, AnimatePresence } from 'motion/react'
 import { cn } from '../../../lib/utils'
 
 export interface ProgressStepProps {

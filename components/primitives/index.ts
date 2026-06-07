@@ -27,3 +27,18 @@ export type { SkeletonBlockProps } from './SkeletonBlock/SkeletonBlock'
 
 export { QuantityStepper } from './QuantityStepper/QuantityStepper'
 export type { QuantityStepperProps } from './QuantityStepper/QuantityStepper'
+
+export { AddressTile } from './AddressTile/AddressTile'
+export type { AddressTileProps } from './AddressTile/AddressTile'
+
+export { BiometricIndicator } from './BiometricIndicator/BiometricIndicator'
+export type { BiometricIndicatorProps } from './BiometricIndicator/BiometricIndicator'
+
+export { PaymentLogo } from './payment-logos/PaymentLogo'
+export type { PaymentLogoProps } from './payment-logos/PaymentLogo'
+
+export { BankLogo } from './BankLogo/BankLogo'
+export type { BankLogoProps } from './BankLogo/BankLogo'
+
+export { ApplePayButton } from './ApplePayButton/ApplePayButton'
+export type { ApplePayButtonProps } from './ApplePayButton/ApplePayButton'

@@ -7,6 +7,7 @@ import { PriceDisplay } from '@/components/primitives'
 import { ActionStrip } from '../ActionStrip/ActionStrip'
 import { DetailList } from '../DetailList/DetailList'
 import { MediaCard } from '../MediaCard/MediaCard'
+import { ModalSheet } from '../../layouts/ModalSheet/ModalSheet'
 import { CardStack } from './CardStack'
 
 const meta = {
@@ -18,12 +19,13 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const FlightOption = ({ flight, airline, price, duration, status }: {
+const FlightOption = ({ flight, airline, price, duration, status, onDetails }: {
   flight: string
   airline: string
   price: number
   duration: string
   status?: 'success' | 'warning' | 'info'
+  onDetails?: () => void
 }) => (
   <div className="rounded-xl border border-border bg-card shadow-[var(--shadow-card)] overflow-hidden">
     <div className="p-4 md:p-5 flex flex-col gap-2">
@@ -40,7 +42,7 @@ const FlightOption = ({ flight, airline, price, duration, status }: {
     </div>
     <ActionStrip>
       <ActionStrip.Primary>Select flight</ActionStrip.Primary>
-      <ActionStrip.Secondary>View details</ActionStrip.Secondary>
+      <ActionStrip.Secondary onClick={onDetails}>View details</ActionStrip.Secondary>
     </ActionStrip>
   </div>
 )
@@ -262,4 +264,68 @@ export const KeyboardNav: Story = {
       </CardStack>
     </div>
   ),
+}
+
+type FlightDetail = { flight: string; airline: string; price: number; duration: string; status?: 'success' | 'warning' | 'info' }
+
+export const WithDetailsSheet: Story = {
+  name: 'With details sheet',
+  render: () => {
+    const [detail, setDetail] = useState<FlightDetail | null>(null)
+
+    const flights: FlightDetail[] = [
+      { flight: 'QF 1 — Sydney to Tokyo', airline: 'Qantas', price: 899, duration: '9h 45m', status: 'success' },
+      { flight: 'QF 3 — Sydney to Osaka', airline: 'Qantas', price: 749, duration: '10h 20m' },
+      { flight: 'QF 7 — Sydney to Seoul', airline: 'Qantas', price: 820, duration: '11h 05m', status: 'info' },
+    ]
+
+    return (
+      <div className="max-w-sm p-4">
+        <p className="text-xs text-muted-foreground mb-4">Click the stack to expand, then tap "View details"</p>
+        <CardStack>
+          {flights.map((f) => (
+            <CardStack.Item key={f.flight}>
+              <FlightOption
+                flight={f.flight}
+                airline={f.airline}
+                price={f.price}
+                duration={f.duration}
+                status={f.status}
+                onDetails={() => setDetail(f)}
+              />
+            </CardStack.Item>
+          ))}
+        </CardStack>
+
+        <ModalSheet
+          open={!!detail}
+          onClose={() => setDetail(null)}
+          title={detail?.flight}
+          size="md"
+        >
+          <ModalSheet.Body>
+            <DetailList>
+              <DetailList.Row label="Airline" value={detail?.airline ?? ''} />
+              <DetailList.Row label="Duration" value={detail?.duration ?? ''} />
+              <DetailList.Row label="Departure" value="10:30 AM SYD" />
+              <DetailList.Row label="Arrival" value="9:15 PM NRT" />
+              <DetailList.Row label="Stops" value="Direct" />
+              <DetailList.Row label="Baggage" value="23 kg included" />
+              <DetailList.Row label="Fare class" value="Economy" />
+            </DetailList>
+            {detail && (
+              <div className="mt-4">
+                <PriceDisplay amount={detail.price} currency="AUD" />
+              </div>
+            )}
+          </ModalSheet.Body>
+          <ModalSheet.Footer>
+            <ActionStrip>
+              <ActionStrip.Primary onClick={() => setDetail(null)}>Select flight</ActionStrip.Primary>
+            </ActionStrip>
+          </ModalSheet.Footer>
+        </ModalSheet>
+      </div>
+    )
+  },
 }

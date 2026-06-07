@@ -294,11 +294,11 @@ Quick reply chips expand in-place into a full card when selected. Unselected chi
 ```tsx
 // Selected chip: layout animation expands width/height to card dimensions
 // Unselected chips: AnimatePresence exit (opacity 0, scale 0.9)
-// Use framer-motion layout prop on the chip container
+// Use motion layout prop on the chip container
 <motion.div layout layoutId={`chip-${id}`}>
 ```
 
-The `layoutId` links the chip and the expanded card so framer-motion morphs between them automatically.
+The `layoutId` links the chip and the expanded card so motion morphs between them automatically.
 
 **Rule**: Only use `layoutId` morphing when the chip and card are in the same `AnimatePresence` context. Do not use for navigating to a new route.
 
@@ -396,4 +396,4 @@ All animations in this file must comply with:
 
 ---
 
-**Version 1.0** | AI Chat specific · Extends motion-guidelines · Framer-motion only
+**Version 1.0** | AI Chat specific · Extends motion-guidelines · Uses `motion` (not framer-motion)

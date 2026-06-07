@@ -69,6 +69,7 @@ Font: **Poppins** (loaded in globals.css). Clean, geometric, neutral — never n
 | Body | `text-sm md:text-base font-normal` | Descriptions, message text |
 | Caption | `text-xs md:text-sm text-muted-foreground` | Timestamps, metadata, subtitles |
 | Label / Tag | `text-xs font-medium uppercase tracking-wide` | Chips, status labels, category tags |
+| Amount / Hero number | `text-3xl md:text-4xl font-semibold tabular-nums tracking-tight` | Payment totals, large price displays |
 
 ### Rules
 - Use `font-semibold` (not bold) for headings — bold is too heavy for a clean look

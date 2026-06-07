@@ -1,6 +1,13 @@
 import type { StorybookConfig } from '@storybook/nextjs-vite';
+import type { InlineConfig } from 'vite';
 
 const config: StorybookConfig = {
+  viteFinal: (config): InlineConfig => {
+    config.optimizeDeps ??= {};
+    config.optimizeDeps.include ??= [];
+    config.optimizeDeps.include.push('motion', 'motion/react');
+    return config;
+  },
   "stories": [
     "../stories/**/*.mdx",
     "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
@@ -16,7 +23,8 @@ const config: StorybookConfig = {
   ],
   "framework": "@storybook/nextjs-vite",
   "staticDirs": [
-    "../public"
+    "../public",
+    { from: "../components/primitives/payment-logos", to: "/payment-logos" }
   ]
 };
 export default config;
