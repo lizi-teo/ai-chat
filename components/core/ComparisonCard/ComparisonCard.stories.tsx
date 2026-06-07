@@ -23,12 +23,12 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const CAR_PLANS = [
+export const CAR_PLANS = [
   { id: 'basic', label: 'Basic cover' },
   { id: 'comprehensive', label: 'Comprehensive' },
 ]
 
-const CAR_CAVEATS = [
+export const CAR_CAVEATS = [
   {
     id: 'none',
     label: 'No claims',
@@ -47,7 +47,7 @@ const CAR_CAVEATS = [
   },
 ]
 
-const CAR_SCENARIOS = [
+export const CAR_SCENARIOS = [
   {
     id: 'accident',
     label: 'At-fault accident',

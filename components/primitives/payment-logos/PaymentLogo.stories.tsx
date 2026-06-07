@@ -6,9 +6,9 @@ import type { PaymentLogoProps } from './PaymentLogo'
 
 // SVG files are NOT bundled — place official brand assets in your app's public directory.
 // See components/primitives/payment-logos/README.md for download links.
-const BASE = '/payment-logos'
+export const BASE = '/payment-logos'
 
-const LOGOS: { slug: string; label: string; category: string }[] = [
+export const LOGOS: { slug: string; label: string; category: string }[] = [
   { slug: 'apple-pay',   label: 'Apple Pay',   category: 'wallets' },
   { slug: 'google-pay',  label: 'Google Pay',  category: 'wallets' },
   { slug: 'mastercard',  label: 'Mastercard',  category: 'cards'   },
@@ -16,7 +16,7 @@ const LOGOS: { slug: string; label: string; category: string }[] = [
   { slug: 'alipay',      label: 'Alipay',      category: 'apm'     },
 ]
 
-function LogoGrid({ size }: { size?: PaymentLogoProps['size'] }) {
+export function LogoGrid({ size }: { size?: PaymentLogoProps['size'] }) {
   return (
     <div className="flex flex-wrap gap-3">
       {LOGOS.map(({ slug, label, category }) => (

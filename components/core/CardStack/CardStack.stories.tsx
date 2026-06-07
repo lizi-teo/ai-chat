@@ -19,7 +19,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const FlightOption = ({ flight, airline, price, duration, status, onDetails }: {
+export const FlightOption = ({ flight, airline, price, duration, status, onDetails }: {
   flight: string
   airline: string
   price: number

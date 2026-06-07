@@ -4,11 +4,11 @@ import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { BankLogo } from './BankLogo'
 
-const BASE = '/bank-logos'
+export const BASE = '/bank-logos'
 
 type BankEntry = { slug: string; label: string }
 
-const GLOBAL: BankEntry[] = [
+export const GLOBAL: BankEntry[] = [
   { slug: 'chase.svg',             label: 'Chase' },
   { slug: 'bankofamerica.svg',     label: 'Bank of America' },
   { slug: 'wellsfargo.svg',        label: 'Wells Fargo' },
@@ -38,7 +38,7 @@ const GLOBAL: BankEntry[] = [
   { slug: 'bnpparibas.png',        label: 'BNP Paribas' },
 ]
 
-const AUSTRALIA: BankEntry[] = [
+export const AUSTRALIA: BankEntry[] = [
   { slug: 'commbank.png',   label: 'Commonwealth Bank' },
   { slug: 'anz.png',        label: 'ANZ' },
   { slug: 'westpac.png',    label: 'Westpac' },
@@ -56,7 +56,7 @@ const AUSTRALIA: BankEntry[] = [
   { slug: 'up.png',         label: 'Up Bank' },
 ]
 
-const SINGAPORE: BankEntry[] = [
+export const SINGAPORE: BankEntry[] = [
   { slug: 'dbs.png',               label: 'DBS' },
   { slug: 'ocbc.png',              label: 'OCBC' },
   { slug: 'maybank.png',           label: 'Maybank' },
@@ -65,7 +65,7 @@ const SINGAPORE: BankEntry[] = [
   { slug: 'posb.png',              label: 'POSB' },
 ]
 
-const JAPAN: BankEntry[] = [
+export const JAPAN: BankEntry[] = [
   { slug: 'mufg.png',      label: 'MUFG' },
   { slug: 'smbc.png',      label: 'SMBC' },
   { slug: 'mizuho.png',    label: 'Mizuho' },
@@ -74,7 +74,7 @@ const JAPAN: BankEntry[] = [
   { slug: 'sbibank.png',   label: 'SBI Shinsei' },
 ]
 
-const NEW_ZEALAND: BankEntry[] = [
+export const NEW_ZEALAND: BankEntry[] = [
   { slug: 'anz.png',       label: 'ANZ' },
   { slug: 'bnz.png',       label: 'BNZ' },
   { slug: 'asb.png',       label: 'ASB' },
@@ -84,7 +84,7 @@ const NEW_ZEALAND: BankEntry[] = [
   { slug: 'heartland.png', label: 'Heartland Bank' },
 ]
 
-const REGIONS = [
+export const REGIONS = [
   { key: 'global',      label: 'Global',      banks: GLOBAL },
   { key: 'australia',   label: 'Australia',   banks: AUSTRALIA },
   { key: 'singapore',   label: 'Singapore',   banks: SINGAPORE },
@@ -94,7 +94,7 @@ const REGIONS = [
 
 type RegionKey = typeof REGIONS[number]['key']
 
-function LogoGrid({ region, banks }: { region: string; banks: BankEntry[] }) {
+export function LogoGrid({ region, banks }: { region: string; banks: BankEntry[] }) {
   return (
     <div className="flex flex-wrap gap-2 md:gap-3">
       {banks.map(({ slug, label }) => (
@@ -112,7 +112,7 @@ function LogoGrid({ region, banks }: { region: string; banks: BankEntry[] }) {
   )
 }
 
-function RegionBrowser() {
+export function RegionBrowser() {
   const [active, setActive] = useState<RegionKey>('global')
   const current = REGIONS.find(r => r.key === active)!
 

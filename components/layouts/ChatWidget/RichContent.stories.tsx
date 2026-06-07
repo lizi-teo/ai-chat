@@ -20,7 +20,7 @@ type Story = StoryObj
 
 // ─── Shared shell ────────────────────────────────────────────────────────────
 
-function ChatShell({ children, botName = 'Assistant' }: { children: React.ReactNode; botName?: string }) {
+export function ChatShell({ children, botName = 'Assistant' }: { children: React.ReactNode; botName?: string }) {
   return (
     <div className="w-[380px] md:w-[420px] flex flex-col gap-3 rounded-2xl border border-border bg-background shadow-[var(--shadow-card)] overflow-hidden">
       <div className="flex items-center gap-3 px-4 py-3 border-b border-border bg-card shrink-0">
@@ -34,7 +34,7 @@ function ChatShell({ children, botName = 'Assistant' }: { children: React.ReactN
   )
 }
 
-function Bot({ children }: { children: React.ReactNode }) {
+export function Bot({ children }: { children: React.ReactNode }) {
   return (
     <MessageBubble role="assistant">
       <MessageBubble.Content>{children}</MessageBubble.Content>
@@ -42,7 +42,7 @@ function Bot({ children }: { children: React.ReactNode }) {
   )
 }
 
-function User({ children }: { children: React.ReactNode }) {
+export function User({ children }: { children: React.ReactNode }) {
   return (
     <MessageBubble role="user">
       <MessageBubble.Content>{children}</MessageBubble.Content>

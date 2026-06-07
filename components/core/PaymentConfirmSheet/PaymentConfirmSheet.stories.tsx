@@ -10,7 +10,7 @@ const LOGOS = {
   alipay: '/payment-logos/apm/alipay.svg',
 }
 
-const COMMON_NETWORKS = [
+export const COMMON_NETWORKS = [
   { src: LOGOS.mastercard, alt: 'Mastercard' },
   { src: LOGOS.applePay, alt: 'Apple Pay' },
   { src: LOGOS.googlePay, alt: 'Google Pay' },

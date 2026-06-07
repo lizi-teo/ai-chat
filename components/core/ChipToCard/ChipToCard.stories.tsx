@@ -12,15 +12,12 @@ const meta = {
   title: 'Components/ChipToCard',
   component: ChipToCard,
   tags: ['autodocs'],
-  args: {
-    chips: [],
-  },
 } satisfies Meta<typeof ChipToCard>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-const flightCard = (destination: string, price: number, duration: string) => (
+export const flightCard = (destination: string, price: number, duration: string) => (
   <div className="p-4 md:p-5 flex flex-col gap-3">
     <div className="flex items-start justify-between gap-2">
       <h3 className="font-semibold text-sm md:text-base text-foreground">{destination}</h3>

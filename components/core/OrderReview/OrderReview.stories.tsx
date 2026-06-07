@@ -13,7 +13,7 @@ const ADDRESS = {
   country: 'United States',
 }
 
-const SINGLE_ITEM = [
+export const SINGLE_ITEM = [
   {
     image: PLACEHOLDER_IMAGE,
     name: 'Premium Leather Watch',
@@ -23,7 +23,7 @@ const SINGLE_ITEM = [
   },
 ]
 
-const MULTI_ITEMS = [
+export const MULTI_ITEMS = [
   {
     image: PLACEHOLDER_IMAGE,
     name: 'Premium Leather Watch',

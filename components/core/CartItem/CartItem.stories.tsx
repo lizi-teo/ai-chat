@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { CartItem } from './CartItem'
 
-const PLACEHOLDER_IMAGE = 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=200&fit=crop'
+export const PLACEHOLDER_IMAGE ='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=200&fit=crop'
 
 const meta = {
   title: 'Components/CartItem',
