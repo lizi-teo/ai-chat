@@ -17,6 +17,19 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const Default: Story = {
+  render: () => (
+    <div className="max-w-xs">
+      <ChipToCard
+        chips={[
+          { id: 'economy', label: 'Economy', card: <div className="p-4"><p className="font-semibold text-sm">Economy to Tokyo</p><p className="text-xs text-muted-foreground">Qantas · $899</p></div> },
+          { id: 'business', label: 'Business', card: <div className="p-4"><p className="font-semibold text-sm">Business to Tokyo</p><p className="text-xs text-muted-foreground">Qantas · $3,499</p></div> },
+        ]}
+      />
+    </div>
+  ),
+}
+
 export const flightCard = (destination: string, price: number, duration: string) => (
   <div className="p-4 md:p-5 flex flex-col gap-3">
     <div className="flex items-start justify-between gap-2">

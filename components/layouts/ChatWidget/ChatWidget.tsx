@@ -170,6 +170,12 @@ export function ChatWidget({
                 {msg.text && <MessageBubble.Content>{msg.text}</MessageBubble.Content>}
               </MessageBubble>
 
+              {msg.richContent && (
+                <div className="w-full">
+                  {msg.richContent}
+                </div>
+              )}
+
               {msg.products && (
                 <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-none">
                   {msg.products.map((product, pi) => (

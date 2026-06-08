@@ -55,7 +55,7 @@ export function BiometricIndicator({ state, className }: BiometricIndicatorProps
         <motion.div
           className="absolute inset-0 rounded-full border-2 border-primary"
           animate={{ scale: [1, 1.55, 1], opacity: [0.5, 0, 0.5] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
         />
       )}
 

@@ -69,7 +69,7 @@ function Option({ value, children, description, icon, className }: OptionProps) 
       aria-checked={isSelected}
       variant="ghost"
       className={cn(
-        'w-full h-auto flex items-center gap-3 rounded-xl px-4 py-3.5 md:py-4 text-left',
+        'w-full h-auto flex items-center gap-3 rounded-xl px-4 py-3.5 md:py-4 text-left whitespace-normal',
         'transition-colors duration-150',
         isSelected
           ? 'border-2 border-primary bg-primary/5 shadow-[var(--shadow-card)] hover:bg-primary/5'

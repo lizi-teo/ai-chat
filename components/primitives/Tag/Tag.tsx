@@ -1,5 +1,6 @@
 'use client'
 
+import { forwardRef } from 'react'
 import { X } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { Button } from '../../ui/button'
@@ -11,11 +12,15 @@ export interface TagProps {
   className?: string
 }
 
-export function Tag({ label, onRemove, className }: TagProps) {
+export const Tag = forwardRef<HTMLSpanElement, TagProps>(function Tag(
+  { label, onRemove, className },
+  ref
+) {
   const shouldReduce = useReducedMotion()
 
   return (
     <motion.span
+      ref={ref}
       layout
       initial={{ opacity: 0, y: shouldReduce ? 0 : 6 }}
       animate={{ opacity: 1, y: 0 }}
@@ -40,4 +45,4 @@ export function Tag({ label, onRemove, className }: TagProps) {
       )}
     </motion.span>
   )
-}
+})

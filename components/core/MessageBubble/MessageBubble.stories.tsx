@@ -17,6 +17,17 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const Default: Story = {
+  render: (args) => (
+    <MessageBubble {...args}>
+      <MessageBubble.Avatar fallback="AI" />
+      <MessageBubble.Content>
+        I found 3 direct flights to Tokyo departing next Tuesday. Would you like to see the options?
+      </MessageBubble.Content>
+    </MessageBubble>
+  ),
+}
+
 export const AssistantMessage: Story = {
   name: 'Assistant message',
   args: { role: 'assistant' },

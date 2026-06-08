@@ -234,6 +234,77 @@ const myAvatarVariants = cva(entityAvatarBase, {
 
 ---
 
+## Stories & Figma Make
+
+Every story file must follow this contract so that **props and mock data appear in Figma Make** when a component is cloned.
+
+### `meta.args` — required, always
+
+`meta.args` is the single source of truth for Figma Make's props panel. Set it with complete, realistic values covering all required props.
+
+```tsx
+const meta = {
+  title: 'Primitives/StatusBadge',
+  component: StatusBadge,
+  tags: ['autodocs'],
+  args: { label: 'Confirmed', variant: 'success' },   // ← Figma Make reads this
+} satisfies Meta<typeof StatusBadge>
+```
+
+### `Default` story — required, always
+
+Figma Make clones from `Default`. Name it exactly `Default`.
+
+```tsx
+export const Default: Story = {}                    // inherits meta.args
+export const Default: Story = { args: { ... } }    // add/override if meta.args is partial
+```
+
+### Complex props — module-scope constants
+
+Array and object props go in named constants at module scope — never inline in `args`. This keeps mock data visible in diffs and reusable across variant stories.
+
+```tsx
+// ✅ module-scope constant — visible in diffs, reusable
+const FLIGHTS = [
+  { id: '1', destination: 'Tokyo', price: 899 },
+  { id: '2', destination: 'Osaka', price: 749 },
+]
+const meta = { args: { flights: FLIGHTS } }
+
+// ❌ inline — invisible in diffs, cannot be reused
+const meta = { args: { flights: [{ id: '1', destination: 'Tokyo', ... }] } }
+```
+
+### Compound components — expose content via `args`
+
+When a component uses a compound slot API (children as sub-components), the `Default` story must expose key text/content as `args` through a `render` function — otherwise the Figma Make props panel is empty.
+
+```tsx
+const meta = {
+  args: { primaryLabel: 'Book now', secondaryLabel: 'View details' },
+}
+
+export const Default: Story = {
+  render: (args) => (
+    <ActionStrip>
+      <ActionStrip.Primary>{args.primaryLabel}</ActionStrip.Primary>
+      <ActionStrip.Secondary>{args.secondaryLabel}</ActionStrip.Secondary>
+    </ActionStrip>
+  ),
+}
+```
+
+### Story naming convention
+
+| Export | Args | Purpose |
+|--------|------|---------|
+| `Default` | from `meta.args` | Always present — Figma Make's clone target |
+| Named variant (`Success`, `Disabled`) | overrides for that variant | One per meaningful state |
+| Showcase (`AllVariants`, `AllStates`) | `render: () =>` ok | Visual reference, no interactivity needed |
+
+---
+
 ## Component Creation Checklist
 
 ### Before Writing Code
@@ -253,6 +324,10 @@ const myAvatarVariants = cva(entityAvatarBase, {
 - [ ] Test light + dark mode
 - [ ] Test mobile → tablet → desktop
 - [ ] No hardcoded values anywhere
+- [ ] `meta.args` set with realistic values for all required props
+- [ ] `export const Default: Story` present (inherits `meta.args` or overrides as needed)
+- [ ] Array/object props defined as named module-scope constants, not inline in `args`
+- [ ] Compound component? Expose key text/content as `args` in `Default` via `render: (args) =>`
 
 ---
 

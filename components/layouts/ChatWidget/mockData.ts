@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 export interface MockProduct {
   name: string
   subtitle?: string
@@ -15,6 +17,8 @@ export interface MockMessage {
   text?: string
   products?: MockProduct[]
   quickReplies?: string[]
+  /** Arbitrary rich content rendered below the message bubble (e.g. ComparisonCard, DetailList) */
+  richContent?: ReactNode
   /** When set, this bot message references the earlier message with this id (triggers glow + SVG line) */
   referencedId?: string
 }

@@ -19,6 +19,8 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const Default: Story = {}
+
 const SAMPLE_ITEMS = [
   { name: 'Premium Leather Watch', price: 299, quantity: 1 },
   { name: 'Classic Sneakers', price: 120, quantity: 2 },

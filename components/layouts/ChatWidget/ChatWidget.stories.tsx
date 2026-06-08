@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { ChatWidget } from './ChatWidget'
 import { THREAD_REF_MOCK } from './mockData'
+import { ComparisonCard } from '../../core/ComparisonCard/ComparisonCard'
+import { DetailList } from '../../core/DetailList/DetailList'
+import { RecipeCard } from '../../core/RecipeCard/RecipeCard'
 
 const meta = {
   title: 'Layouts/ChatWidget',
@@ -13,10 +16,13 @@ const meta = {
       </div>
     ),
   ],
+  args: { vertical: 'grocery' },
 } satisfies Meta<typeof ChatWidget>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {}
 
 export const MobileFullscreen: Story = {
   name: 'Mobile fullscreen',
@@ -49,6 +55,117 @@ export const Pharmacy: Story = {
 export const ThreadReferenceGlow: Story = {
   name: 'Thread reference glow (ambient)',
   args: { mockData: THREAD_REF_MOCK },
+}
+
+export const RichContentComparisonCard: Story = {
+  name: 'Rich content — ComparisonCard (insurance)',
+  args: {
+    mockData: {
+      botName: 'Insurance Assistant',
+      messages: [
+        {
+          role: 'user',
+          text: 'Should I get Comprehensive or Third Party for my 2019 Mazda 3?',
+        },
+        {
+          role: 'bot',
+          text: "Based on your car's value, Comprehensive saves you money in most claim scenarios. Here's the breakdown:",
+          richContent: (
+            <ComparisonCard
+              title="Why Comprehensive?"
+              subtitle="Based on your vehicle value and profile"
+              plans={[
+                { id: 'comp', label: 'Comprehensive' },
+                { id: 'tpp', label: 'Third Party' },
+              ]}
+              caveats={[
+                { id: 'no-at-fault', label: 'No at-fault claims', planCosts: { comp: 980, tpp: 420 } },
+                { id: 'one-at-fault', label: '1 at-fault claim', planCosts: { comp: 980, tpp: 5200 }, default: true },
+                { id: 'hail', label: 'Hail damage', planCosts: { comp: 980, tpp: 3800 } },
+              ]}
+              scenarios={[
+                { id: 'theft', label: 'Car stolen', insight: "Third Party doesn't cover theft. You'd lose the full market value (~$14,000) with no payout." },
+                { id: 'flood', label: 'Flood damage', insight: 'Comprehensive covers flood. Third Party leaves you covering the repair or replacement out-of-pocket.' },
+              ]}
+            />
+          ),
+          quickReplies: ['Get a quote', 'See full policy details', 'Ask something else'],
+        },
+      ],
+    },
+  },
+}
+
+export const RichContentDetailList: Story = {
+  name: 'Rich content — DetailList (recipe ingredients)',
+  args: {
+    mockData: {
+      botName: 'Recipe Assistant',
+      messages: [
+        { role: 'user', text: 'What do I need for pasta carbonara for 4?' },
+        {
+          role: 'bot',
+          text: 'Here are the ingredients:',
+          richContent: (
+            <div className="rounded-[var(--radius)] border border-border bg-card shadow-[var(--shadow-card)] overflow-hidden">
+              <DetailList>
+                <DetailList.Row label="Spaghetti" value="400 g" />
+                <DetailList.Row label="Pancetta or guanciale" value="200 g" />
+                <DetailList.Row label="Eggs (whole)" value="2" />
+                <DetailList.Row label="Egg yolks" value="4" />
+                <DetailList.Row label="Pecorino Romano, grated" value="80 g" />
+                <DetailList.Row label="Parmesan, grated" value="40 g" />
+                <DetailList.Row label="Black pepper, freshly ground" value="to taste" />
+                <DetailList.Row label="Salt (pasta water)" value="generous pinch" />
+              </DetailList>
+            </div>
+          ),
+          quickReplies: ['Add all to cart', 'Show steps', 'Adjust servings'],
+        },
+      ],
+    },
+  },
+}
+
+export const RichContentRecipeCard: Story = {
+  name: 'Rich content — RecipeCard (grocery)',
+  decorators: [
+    (Story) => (
+      <div className="w-[380px] md:w-[420px] h-[780px]">
+        <Story />
+      </div>
+    ),
+  ],
+  args: {
+    mockData: {
+      botName: 'Coles Assistant',
+      messages: [
+        { role: 'user', text: 'Ingredients for pasta carbonara for 4?' },
+        {
+          role: 'bot',
+          text: "Here's the recipe. Tap ingredients to deselect any you already have, then add the rest to your cart:",
+          richContent: (
+            <RecipeCard
+              title="Pasta Carbonara"
+              prepTime="25 min"
+              difficulty="easy"
+              defaultServings={4}
+              image="https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800&h=400&fit=crop"
+              imageAlt="Pasta carbonara in a bowl"
+              ingredients={[
+                { id: 'pasta', name: 'Spaghetti', quantity: 100, unit: 'g' },
+                { id: 'pancetta', name: 'Pancetta', quantity: 50, unit: 'g' },
+                { id: 'eggs', name: 'Eggs (whole)', quantity: 1, unit: 'whole' },
+                { id: 'yolks', name: 'Egg yolks', quantity: 1, unit: 'whole' },
+                { id: 'pecorino', name: 'Pecorino Romano, grated', quantity: 20, unit: 'g' },
+                { id: 'parmesan', name: 'Parmesan, grated', quantity: 10, unit: 'g' },
+              ]}
+            />
+          ),
+        },
+      ],
+    },
+  },
 }
 
 export const CustomMockData: Story = {

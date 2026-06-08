@@ -15,6 +15,18 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const Default: Story = {
+  args: { type: 'radio', defaultValue: 'economy' },
+  render: (args) => (
+    <div className="max-w-sm">
+      <SelectionGroup {...args}>
+        <SelectionGroup.Option value="economy" description="Standard seat, 1 carry-on bag included">Economy class</SelectionGroup.Option>
+        <SelectionGroup.Option value="business" description="Lie-flat seat, lounge access, 2 checked bags">Business class</SelectionGroup.Option>
+      </SelectionGroup>
+    </div>
+  ),
+}
+
 export const RadioUncontrolled: Story = {
   name: 'Radio (uncontrolled)',
   args: { defaultValue: 'economy' },

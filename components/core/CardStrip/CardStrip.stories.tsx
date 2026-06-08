@@ -18,6 +18,33 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const Default: Story = {
+  render: () => (
+    <div className="max-w-sm">
+      <CardStrip>
+        <CardStrip.Item>
+          <div className="rounded-xl border border-border bg-card overflow-hidden p-4">
+            <p className="font-semibold text-sm text-foreground">Economy to Tokyo</p>
+            <p className="text-xs text-muted-foreground">Qantas · Direct · $899</p>
+          </div>
+        </CardStrip.Item>
+        <CardStrip.Item>
+          <div className="rounded-xl border border-border bg-card overflow-hidden p-4">
+            <p className="font-semibold text-sm text-foreground">Economy to Osaka</p>
+            <p className="text-xs text-muted-foreground">Qantas · Direct · $749</p>
+          </div>
+        </CardStrip.Item>
+        <CardStrip.Item>
+          <div className="rounded-xl border border-border bg-card overflow-hidden p-4">
+            <p className="font-semibold text-sm text-foreground">Economy to Seoul</p>
+            <p className="text-xs text-muted-foreground">Qantas · Direct · $820</p>
+          </div>
+        </CardStrip.Item>
+      </CardStrip>
+    </div>
+  ),
+}
+
 export const FlightCard = ({ destination, airline, price, status, onDetails }: {
   destination: string
   airline: string

@@ -2,7 +2,7 @@
 
 Covers every component needed to support a full agent-assisted commerce flow: discovery → cart → order review → passkey auth → payment → fulfilment. All components follow the atomic tier rules in `CLAUDE.md`.
 
-> **Status (2026-06-06):** Not started. Work through phases in order — each phase unblocks the next.
+> **Status (2026-06-08):** Phases 1–7 complete. All 17 components built, storied, and exported.
 
 ---
 

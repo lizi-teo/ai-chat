@@ -19,6 +19,33 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const Default: Story = {
+  render: () => (
+    <div className="max-w-sm p-4">
+      <CardStack>
+        <CardStack.Item>
+          <div className="rounded-xl border border-border bg-card p-4">
+            <p className="font-semibold text-sm text-foreground">QF 1 — Sydney to Tokyo</p>
+            <p className="text-xs text-muted-foreground">9h 45m · $899</p>
+          </div>
+        </CardStack.Item>
+        <CardStack.Item>
+          <div className="rounded-xl border border-border bg-card p-4">
+            <p className="font-semibold text-sm text-foreground">QF 3 — Sydney to Osaka</p>
+            <p className="text-xs text-muted-foreground">10h 20m · $749</p>
+          </div>
+        </CardStack.Item>
+        <CardStack.Item>
+          <div className="rounded-xl border border-border bg-card p-4">
+            <p className="font-semibold text-sm text-foreground">QF 7 — Sydney to Seoul</p>
+            <p className="text-xs text-muted-foreground">11h 05m · $820</p>
+          </div>
+        </CardStack.Item>
+      </CardStack>
+    </div>
+  ),
+}
+
 export const FlightOption = ({ flight, airline, price, duration, status, onDetails }: {
   flight: string
   airline: string

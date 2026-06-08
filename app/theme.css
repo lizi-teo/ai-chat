@@ -9,6 +9,11 @@
 
    TIER 3  SYSTEM     Library internals: shadows, Apple Pay, charts, layout.
                       Do not override in client themes.
+
+   FIGMA MAKE COMPATIBILITY
+   Token names align with Figma Make's generated globals.css (shadcn convention).
+   To apply a brand: copy your Figma Make :root and .dark blocks here, replacing
+   the values below. Leave globals.css untouched — it is shared infrastructure.
 ────────────────────────────────────────────────────────────────────────────── */
 
 :root {
@@ -17,6 +22,9 @@
 
   /* Typeface — replace with any Google Font or system stack */
   --font-sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-size: 16px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
 
   /* Page surface — cool off-white; tint toward brand hue for stronger identity */
   --background: oklch(0.97 0.007 248);
@@ -46,6 +54,7 @@
   --accent-foreground: oklch(0.14 0.010 258);
 
   --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0 0);
   --success: oklch(0.50 0.15 150);
   --success-foreground: oklch(0.98 0 0);
   --warning: oklch(0.72 0.16 75);
@@ -53,6 +62,8 @@
 
   --border: oklch(0.90 0.007 248);
   --input: oklch(0.90 0.007 248);
+  --input-background: oklch(0.96 0.006 248);
+  --switch-background: oklch(0.78 0.008 248);
   /* Focus ring — set to match primary hue in client themes */
   --ring: oklch(0.40 0 0);
 
@@ -113,12 +124,15 @@
   --accent: oklch(0.23 0.010 258);
   --accent-foreground: oklch(0.97 0.004 248);
   --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.98 0 0);
   --success: oklch(0.63 0.15 150);
   --success-foreground: oklch(0.13 0.010 258);
   --warning: oklch(0.80 0.16 75);
   --warning-foreground: oklch(0.13 0.010 258);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 14%);
+  --input-background: oklch(0.20 0.010 258);
+  --switch-background: oklch(0.35 0.010 258);
   --ring: oklch(0.65 0 0);
   --sidebar: oklch(0.18 0.010 258);
   --sidebar-foreground: oklch(0.97 0.004 248);

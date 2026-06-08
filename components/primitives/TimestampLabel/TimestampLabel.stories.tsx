@@ -5,10 +5,13 @@ const meta = {
   title: 'Primitives/TimestampLabel',
   component: TimestampLabel,
   tags: ['autodocs'],
+  args: { datetime: '2026-06-08T06:00:00.000Z' },
 } satisfies Meta<typeof TimestampLabel>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = { args: { datetime: '2026-06-08T06:00:00.000Z' } }
 
 const ago = (ms: number) => new Date(Date.now() - ms).toISOString()
 

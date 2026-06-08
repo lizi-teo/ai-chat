@@ -11,6 +11,19 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const Default: Story = {
+  render: () => (
+    <div className="max-w-xs rounded-xl border border-border bg-card overflow-hidden">
+      <DetailList>
+        <DetailList.Row label="Departs" value="06:45 SYD" />
+        <DetailList.Row label="Arrives" value="22:30 NRT" />
+        <DetailList.Row label="Duration" value="9h 45m" />
+        <DetailList.Row label="Stops" value="Direct" />
+      </DetailList>
+    </div>
+  ),
+}
+
 export const FlightDetails: Story = {
   name: 'Flight details (travel)',
   render: () => (

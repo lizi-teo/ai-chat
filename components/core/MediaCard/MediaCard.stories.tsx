@@ -14,6 +14,23 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const Default: Story = {
+  render: () => (
+    <div className="max-w-xs">
+      <MediaCard>
+        <MediaCard.Media
+          src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=200&fit=crop"
+          alt="Airplane wing at sunset"
+        />
+        <MediaCard.Body>
+          <MediaCard.Title>Economy to Tokyo</MediaCard.Title>
+          <MediaCard.Subtitle>Qantas · QF 1 · Direct · 9h 45m</MediaCard.Subtitle>
+        </MediaCard.Body>
+      </MediaCard>
+    </div>
+  ),
+}
+
 export const Flight: Story = {
   name: 'Flight listing (travel)',
   render: () => (

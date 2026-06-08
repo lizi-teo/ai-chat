@@ -10,6 +10,15 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const Default: Story = {
+  render: () => (
+    <ActionStrip>
+      <ActionStrip.Primary onClick={() => {}}>Book now</ActionStrip.Primary>
+      <ActionStrip.Secondary onClick={() => {}}>View details</ActionStrip.Secondary>
+    </ActionStrip>
+  ),
+}
+
 export const PrimaryOnly: Story = {
   name: 'Primary only',
   render: () => (

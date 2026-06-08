@@ -11,6 +11,8 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const Default: Story = { args: { status: 'pending', label: 'Search' } }
+
 export const Pending: Story = { args: { status: 'pending', label: 'Search' } }
 export const Active: Story = { args: { status: 'active', label: 'Book' } }
 export const Complete: Story = { args: { status: 'complete', label: 'Confirm' } }

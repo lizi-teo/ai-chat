@@ -34,9 +34,14 @@ app/
 .docs/
   plans/              # Architecture decision docs
   guidelines/
-    ui-guidelines     # CSS architecture, responsive, a11y, component rules
-    style-guidelines  # Clean look design language — colors, radius, shadows, typography
-  motion-guidelines   # Animation system, framer-motion patterns
+    ui-guidelines           # CSS architecture, responsive, a11y, component rules
+    style-guidelines        # Clean look design language — colors, radius, shadows, typography
+    motion-guidelines       # Animation system, framer-motion patterns
+    figma-guidelines.md     # Figma kit — tier map, CSS→token mapping, shared atom rule, variant naming
+    figma-sync-workflow.md  # How repo ↔ Figma sync works: catalog, drift check, #figbuild
+  figma-catalog.json      # Source of truth: every component's sync status + Figma node ID
+scripts/
+  figma-drift.js          # CLI drift report: compares repo folders vs catalog
 ```
 
 **Dependency direction:** primitives ← core ← layouts. Never sideways, never upward. A primitive must not import from core or layouts. A core component must not import from layouts.
@@ -73,7 +78,7 @@ When `#ui` appears in a prompt, read `.docs/guidelines/ui-guidelines` AND `.docs
 
 ## #motion
 
-When `#motion` appears in a prompt, read `.docs/motion-guidelines` in full and apply every rule from it before writing any animation or transition code.
+When `#motion` appears in a prompt, read `.docs/guidelines/motion-guidelines` in full and apply every rule from it before writing any animation or transition code.
 
 Use `#ui #motion` together when building or updating any component that animates.
 
@@ -82,3 +87,20 @@ When I type `#fig`, use Figma MCP commands in this order:
 - **Get variables (ALWAYS REQUIRED - must be done FIRST)**
 - Get code
 - Get image
+
+## #figkit
+
+When `#figkit` appears in a prompt, read `.docs/guidelines/figma-guidelines.md` in full and apply every rule from it before writing any `use_figma` code. This covers: component tier map, CSS→Figma variable mapping, shared atom rule (reuse existing instances, never recreate), component property conventions, variant axis naming, and page/grid layout standards.
+
+## #figbuild
+
+When `#figbuild` appears in a prompt:
+1. Read `.docs/figma-catalog.json` — identify all entries with `"status": "pending"`
+2. Read `.docs/guidelines/figma-guidelines.md` in full (same as `#figkit`)
+3. If a specific component name is given (e.g. `#figbuild MessageBubble`), build only that one. If `--all` is given or no name specified, present the full pending list and confirm which to build.
+4. Build each component in Figma following all `#figkit` rules: token bindings, shared atom instances, component properties, variant naming, one page per core component.
+5. After each successful build, update `.docs/figma-catalog.json`: set `status → "synced"`, add `figmaNodeId`, `variants`, and `props`.
+
+## #figcheck
+
+When `#figcheck` appears in a prompt, run `node scripts/figma-drift.js` and report the output. Summarise what is pending, what is unlisted (in repo but not in catalog), and what is synced. If anything is pending, suggest running `#figbuild`.

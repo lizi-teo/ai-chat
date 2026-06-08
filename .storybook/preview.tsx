@@ -7,15 +7,10 @@ const preview: Preview = {
   decorators: [
     withThemeByClassName({
       themes: {
-        'Default (light)': '',
+        'Light': '',
         'Dark': 'dark',
-        'Travel': 'theme-travel',
-        'Retail': 'theme-retail',
-        'Healthcare': 'theme-healthcare',
-        'Chemist Warehouse': 'theme-chemist',
-        'Coles': 'theme-coles',
       },
-      defaultTheme: 'Default (light)',
+      defaultTheme: 'Light',
     }),
   ],
   parameters: {

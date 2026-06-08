@@ -8,6 +8,7 @@ const meta = {
   title: 'Components/ComparisonCard',
   component: ComparisonCard,
   tags: ['autodocs'],
+  excludeStories: ['CAR_PLANS', 'CAR_CAVEATS', 'CAR_SCENARIOS'],
   parameters: {
     layout: 'padded',
   },

@@ -13,10 +13,13 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   decorators: [wrapper],
+  args: { label: 'Pay with', onClick: () => {} },
 } satisfies Meta<typeof ApplePayButton>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {}
 
 export const PayWith: Story = {
   name: 'Pay with  Pay',
