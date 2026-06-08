@@ -3,8 +3,7 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { BankLogo } from './BankLogo'
-
-export const BASE = '/bank-logos'
+import { BANK_LOGOS } from '../bank-logos/logos'
 
 type BankEntry = { slug: string; label: string }
 
@@ -39,21 +38,21 @@ export const GLOBAL: BankEntry[] = [
 ]
 
 export const AUSTRALIA: BankEntry[] = [
-  { slug: 'commbank.png',   label: 'Commonwealth Bank' },
-  { slug: 'anz.png',        label: 'ANZ' },
-  { slug: 'westpac.png',    label: 'Westpac' },
-  { slug: 'nab.png',        label: 'NAB' },
-  { slug: 'macquarie.png',  label: 'Macquarie' },
-  { slug: 'suncorp.png',    label: 'Suncorp' },
-  { slug: 'bendigobank.png',label: 'Bendigo Bank' },
-  { slug: 'bankwest.png',   label: 'Bankwest' },
-  { slug: 'ing.png',        label: 'ING Australia' },
-  { slug: 'mebank.png',     label: 'ME Bank' },
-  { slug: 'rabobank.png',   label: 'Rabobank' },
-  { slug: 'banksa.png',     label: 'Bank SA' },
-  { slug: 'stgeorge.png',   label: 'St George' },
-  { slug: 'boq.png',        label: 'Bank of Queensland' },
-  { slug: 'up.png',         label: 'Up Bank' },
+  { slug: 'commbank.png',    label: 'Commonwealth Bank' },
+  { slug: 'anz.png',         label: 'ANZ' },
+  { slug: 'westpac.png',     label: 'Westpac' },
+  { slug: 'nab.png',         label: 'NAB' },
+  { slug: 'macquarie.png',   label: 'Macquarie' },
+  { slug: 'suncorp.png',     label: 'Suncorp' },
+  { slug: 'bendigobank.png', label: 'Bendigo Bank' },
+  { slug: 'bankwest.png',    label: 'Bankwest' },
+  { slug: 'ing.png',         label: 'ING Australia' },
+  { slug: 'mebank.png',      label: 'ME Bank' },
+  { slug: 'rabobank.png',    label: 'Rabobank' },
+  { slug: 'banksa.png',      label: 'Bank SA' },
+  { slug: 'stgeorge.png',    label: 'St George' },
+  { slug: 'boq.png',         label: 'Bank of Queensland' },
+  { slug: 'up.png',          label: 'Up Bank' },
 ]
 
 export const SINGAPORE: BankEntry[] = [
@@ -103,7 +102,7 @@ export function LogoGrid({ region, banks }: { region: string; banks: BankEntry[]
           className="flex flex-col items-center gap-2 rounded-xl border border-border bg-card p-3 md:p-4 w-20 md:w-24"
         >
           <div className="flex size-10 md:size-12 items-center justify-center">
-            <BankLogo src={`${BASE}/${region}/${slug}`} alt={label} size="lg" />
+            <BankLogo src={BANK_LOGOS[`${region}/${slug}`] ?? ''} alt={label} size="lg" />
           </div>
           <span className="text-center text-[10px] leading-tight text-muted-foreground">{label}</span>
         </div>
@@ -144,7 +143,7 @@ const meta = {
   component: BankLogo,
   tags: ['autodocs'],
   args: {
-    src: `${BASE}/global/chase.svg`,
+    src: BANK_LOGOS['global/chase.svg'],
     alt: 'Chase',
     size: 'md',
   },
@@ -161,7 +160,7 @@ export const Sizes: Story = {
       {(['sm', 'md', 'lg'] as const).map((size) => (
         <div key={size} className="flex flex-col items-center gap-2">
           <div className="flex items-center justify-center rounded-xl border border-border bg-card p-3">
-            <BankLogo src={`${BASE}/global/chase.svg`} alt="Chase" size={size} />
+            <BankLogo src={BANK_LOGOS['global/chase.svg']} alt="Chase" size={size} />
           </div>
           <span className="text-xs text-muted-foreground">{size}</span>
         </div>

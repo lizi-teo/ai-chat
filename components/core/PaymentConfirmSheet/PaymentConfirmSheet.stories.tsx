@@ -2,12 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { PaymentConfirmSheet } from './PaymentConfirmSheet'
 
+import { PAYMENT_LOGOS } from '../../primitives/payment-logos/logos'
+
 const LOGOS = {
-  mastercard: '/payment-logos/cards/mastercard.svg',
-  applePay: '/payment-logos/wallets/apple-pay.svg',
-  googlePay: '/payment-logos/wallets/google-pay.svg',
-  paypal: '/payment-logos/apm/paypal.svg',
-  alipay: '/payment-logos/apm/alipay.svg',
+  mastercard: PAYMENT_LOGOS['cards/mastercard.svg'],
+  applePay:   PAYMENT_LOGOS['wallets/apple-pay.svg'],
+  googlePay:  PAYMENT_LOGOS['wallets/google-pay.svg'],
+  paypal:     PAYMENT_LOGOS['apm/paypal.svg'],
+  alipay:     PAYMENT_LOGOS['apm/alipay.svg'],
 }
 
 export const COMMON_NETWORKS = [
@@ -41,6 +43,8 @@ const meta = {
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {}
 
 // ---------------------------------------------------------------------------
 // Apple Pay

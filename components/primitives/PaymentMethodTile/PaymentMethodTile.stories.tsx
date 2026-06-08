@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { PaymentMethodTile } from './PaymentMethodTile'
+import { PAYMENT_LOGOS } from '../payment-logos/logos'
 
 const meta = {
   title: 'Primitives/PaymentMethodTile',
@@ -15,6 +16,8 @@ const meta = {
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {}
 
 export const Card: Story = {
   args: { type: 'card', label: '•••• 4242' },
@@ -82,7 +85,7 @@ export const WithNetworkLogos: Story = {
       <PaymentMethodTile
         type="card"
         label="Mastercard •••• 5555"
-        networkLogoSrc="/payment-logos/cards/mastercard.svg"
+        networkLogoSrc={PAYMENT_LOGOS['cards/mastercard.svg']}
         selected
       />
       <PaymentMethodTile

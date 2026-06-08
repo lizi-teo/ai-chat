@@ -3,28 +3,25 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { PaymentLogo } from './PaymentLogo'
 import type { PaymentLogoProps } from './PaymentLogo'
+import { PAYMENT_LOGOS } from './logos'
 
-// SVG files are NOT bundled — place official brand assets in your app's public directory.
-// See components/primitives/payment-logos/README.md for download links.
-export const BASE = '/payment-logos'
-
-export const LOGOS: { slug: string; label: string; category: string }[] = [
-  { slug: 'apple-pay',   label: 'Apple Pay',   category: 'wallets' },
-  { slug: 'google-pay',  label: 'Google Pay',  category: 'wallets' },
-  { slug: 'mastercard',  label: 'Mastercard',  category: 'cards'   },
-  { slug: 'paypal',      label: 'PayPal',      category: 'apm'     },
-  { slug: 'alipay',      label: 'Alipay',      category: 'apm'     },
+export const LOGOS: { key: keyof typeof PAYMENT_LOGOS; label: string }[] = [
+  { key: 'wallets/apple-pay.svg',   label: 'Apple Pay'  },
+  { key: 'wallets/google-pay.svg',  label: 'Google Pay' },
+  { key: 'cards/mastercard.svg',    label: 'Mastercard' },
+  { key: 'apm/paypal.svg',          label: 'PayPal'     },
+  { key: 'apm/alipay.svg',          label: 'Alipay'     },
 ]
 
 export function LogoGrid({ size }: { size?: PaymentLogoProps['size'] }) {
   return (
     <div className="flex flex-wrap gap-3">
-      {LOGOS.map(({ slug, label, category }) => (
+      {LOGOS.map(({ key, label }) => (
         <div
-          key={slug}
+          key={key}
           className="flex flex-col items-center gap-1.5 rounded-lg border border-border bg-card p-3 md:p-4"
         >
-          <PaymentLogo src={`${BASE}/${category}/${slug}.svg`} alt={label} size={size} />
+          <PaymentLogo src={PAYMENT_LOGOS[key]} alt={label} size={size} />
           <span className="text-xs text-muted-foreground">{label}</span>
         </div>
       ))}
@@ -37,7 +34,7 @@ const meta = {
   component: PaymentLogo,
   tags: ['autodocs'],
   args: {
-    src: `${BASE}/cards/mastercard.svg`,
+    src: PAYMENT_LOGOS['cards/mastercard.svg'],
     alt: 'Mastercard',
     size: 'md',
   },
@@ -55,7 +52,7 @@ export const Sizes: Story = {
       {(['sm', 'md', 'lg'] as const).map((size) => (
         <div key={size} className="flex flex-col items-center gap-1.5">
           <div className="flex items-center justify-center rounded-lg border border-border bg-card p-3">
-            <PaymentLogo src={`${BASE}/cards/mastercard.svg`} alt="Mastercard" size={size} />
+            <PaymentLogo src={PAYMENT_LOGOS['cards/mastercard.svg']} alt="Mastercard" size={size} />
           </div>
           <span className="text-xs text-muted-foreground">{size}</span>
         </div>
