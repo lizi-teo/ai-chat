@@ -63,7 +63,7 @@ function Field({ placeholder = 'Type a message…', className }: FieldProps) {
       rows={1}
       aria-label="Message input"
       className={cn(
-        'flex-1 resize-none bg-transparent text-sm md:text-base text-foreground',
+        'flex-1 resize-none bg-transparent text-base text-foreground',
         'placeholder:text-muted-foreground leading-relaxed',
         'outline-none border-0 ring-0 shadow-none',
         'max-h-32 md:max-h-40 overflow-y-auto',
